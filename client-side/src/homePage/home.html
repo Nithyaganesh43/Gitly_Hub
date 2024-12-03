@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+    }
+    
+    .container {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px 5px;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+    </style> 
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome Home (testing...)</h1> 
+        <button onclick="clearJwt()">Clear Tokens</button>
+        <button onclick="removeUsersFromDataBase()">remove your account from Gitly</button>
+    </div>
+    <script>
+        function clearJwt() {
+            document.cookie = "token=;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        }
+        async function removeUsersFromDataBase(){
+            await axios.delete('http://localhost:3000/removeAllUsersInDataBase')
+            .then(response => {  
+                alert(response.data.message);  
+            });
+        }
+    </script>
+</body>
+</html>

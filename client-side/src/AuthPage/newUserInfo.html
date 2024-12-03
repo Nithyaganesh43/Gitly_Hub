@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../styles/newUserInfo.css">
+</head>
+<body>
+    <div class="form-container">
+        <div id="profile-form"> 
+            <img src="https://res.cloudinary.com/dmini3yl9/image/upload/v1730714916/di75th4l9fqebilewtur.avif" alt="Profile Picture" id="profile-img">
+             
+            <form action="#" method="POST">
+                <h1>Profile</h1>
+                
+                <input type="text" id="fullName" name="fullname" placeholder="Full Name" required>
+           
+                <input type="email" id="email" name="email" value="user@email.com" readonly>                
+             
+                <input type="text" id="platform" name="platform" value="Gitly" readonly>
+              
+                <input type="text" id="userName" name="username" placeholder="Username" required>
+             
+                <input type="password" id="password" name="password" placeholder="Password" required>
+               
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+                
+                <button type="button"   id="submit-button">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="../script/newUserInfo.js"></script>
+</html>

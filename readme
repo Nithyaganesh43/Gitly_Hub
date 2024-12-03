@@ -1,0 +1,38 @@
+Gitly/
+├── .env
+├── .gitignore
+├── readme
+├── client-side/
+│   ├── readme
+│   ├── prototype/
+│   ├── src/
+│   │   ├── AuthPage/
+│   │   │   ├── authIndex.html
+│   │   │   ├── forgotPassword.html
+│   │   │   ├── login.html
+│   │   │   ├── newUserInfo.html
+│   │   │   └── signup.html
+│   │   ├── homePage/
+│   │   ├── script/
+│   │   │   ├── authIndex.js
+│   │   │   ├── forgotPassword.js
+│   │   │   ├── login.js
+│   │   │   ├── newUserInfo.js
+│   │   │   └── signupLogic.js
+│   │   ├── styles/
+│   │   │   ├── authIndex.css
+│   │   │   ├── forgotPassword.css
+│   │   │   ├── newUserInfo.css
+│   │   │   └── signup.css
+├── server-side/
+│   ├── .gitignore
+│   ├── node_modules/
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── src/
+│   │   ├── app.js
+│   │   ├── config/
+│   │   ├── helper/
+│   │   ├── middlewares/
+│   │   ├── models/
+│   │   └── router/

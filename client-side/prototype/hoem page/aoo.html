@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File and Folder Upload with Tree View</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+        li {
+            cursor: pointer;
+        }
+        .file-tree {
+            margin-top: 20px;
+        }
+        .toggle::before {
+            content: "▶";
+            margin-right: 5px;
+        }
+        .open .toggle::before {
+            content: "▼";
+        }
+        .file-content {
+            font-family: monospace;
+            white-space: pre-wrap;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Files and Folders</h1>
+    <input type="file" id="fileInput" webkitdirectory multiple />
+    <button onclick="generateJSON()">Generate JSON</button>
+
+    <h2>File Tree</h2>
+    <div id="fileTree" class="file-tree"></div>
+    <h2>Generated JSON</h2>
+    <pre id="output"></pre>
+
+    <script>
+        async function generateJSON() {
+            const inputElement = document.getElementById('fileInput');
+            const files = Array.from(inputElement.files);
+
+            let fileTree = [];
+
+            for (const file of files) {
+                const filePath = file.webkitRelativePath.split('/');
+                await buildFileTree(fileTree, filePath, file, filePath.length === 1);
+            }
+
+            document.getElementById("output").textContent = JSON.stringify(fileTree, null, 2);
+            displayFileTree(fileTree, document.getElementById("fileTree"));
+        }
+
+        async function buildFileTree(tree, pathArray, file, isTopLevel) {
+            const [currentFolder, ...remainingPath] = pathArray;
+
+            // If it's a standalone file, add as sub-file
+            if (isTopLevel && remainingPath.length === 0) {
+                tree.push({
+                    name: `sub-file: ${file.name}`,
+                    type: "file",
+                    extension: file.name.split('.').pop(),
+                    content: await file.text()
+                });
+                return;
+            }
+
+            // Handle the parent repo (only for the top-level folder)
+            let currentNode = tree.find(item => item.name === `parent repo: ${currentFolder}`);
+
+            if (!currentNode) {
+                currentNode = {
+                    name: isTopLevel ? `parent repo: ${currentFolder}` : `sub-repo: ${currentFolder}`,
+                    type: remainingPath.length === 0 ? "file" : "directory",
+                    children: remainingPath.length === 0 ? null : []
+                };
+                tree.push(currentNode);
+            }
+
+            if (remainingPath.length === 0) {
+                currentNode.extension = file.name.split('.').pop();
+                currentNode.content = await file.text();
+                currentNode.name = `sub-file: ${file.name}`;
+            } else {
+                await buildFileTree(currentNode.children, remainingPath, file, false);
+            }
+        }
+
+        function displayFileTree(tree, container) {
+            container.innerHTML = "";
+            const ul = document.createElement("ul");
+            buildTreeList(tree, ul);
+            container.appendChild(ul);
+        }
+
+        function buildTreeList(nodes, parentElement) {
+            nodes.forEach(node => {
+                const li = document.createElement("li");
+                li.textContent = node.name;
+
+                if (node.type === "directory") {
+                    li.classList.add("toggle");
+                    const childUl = document.createElement("ul");
+                    childUl.style.display = "none";
+                    buildTreeList(node.children, childUl);
+                    li.appendChild(childUl);
+
+                    li.addEventListener("click", function(event) {
+                        event.stopPropagation();
+                        this.classList.toggle("open");
+                        childUl.style.display = childUl.style.display === "none" ? "block" : "none";
+                    });
+                } else {
+                    li.classList.add("file");
+                    li.addEventListener("click", function(event) {
+                        event.stopPropagation();
+                        displayFileContent(node.content);
+                    });
+                }
+                parentElement.appendChild(li);
+            });
+        }
+
+        function displayFileContent(content) {
+            const fileContent = document.getElementById("output");
+            fileContent.textContent = content;
+            fileContent.classList.add("file-content");
+        }
+    </script>
+</body>
+</html>

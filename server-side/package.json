@@ -1,0 +1,28 @@
+{
+  "name": "devtinder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server-side/src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nithya Ganesh",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.1",
+    "nodemailer": "^6.9.16",
+    "passport": "^0.7.0",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0",
+    "path": "^0.12.7",
+    "validator": "^13.12.0"
+  }
+}

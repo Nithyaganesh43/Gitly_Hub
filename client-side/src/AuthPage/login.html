@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gitly - Authentication</title>
+    <link rel="stylesheet" href="../styles/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../script/login.js" defer></script>
+</head>
+<body>
+    <form>
+        <h1> Login</h1>
+        <div id="userPassword">
+            <input type="text" id="userName" placeholder="Username" minlength="8" required>
+            <input type="password" id="password" placeholder="Password" minlength="8" required>
+        </div>
+        <button type="button" onclick="login()">login</button>
+        <p onclick="forgotPassword()" id="forgotPassword">Forgot Password</p>
+        <div class="social-login">
+            <img onclick="googleLoginButton()" 
+                 src="https://res.cloudinary.com/dmini3yl9/image/upload/v1730510883/Google_logo_without_tick_jiu9v7.png" 
+                 id="google_logo" alt="Login with Google">
+            <h2 id="or">or</h2>
+            <img onclick="githubLoginButton()" 
+                 src="https://res.cloudinary.com/dmini3yl9/image/upload/v1730510883/Github_logo_without_tick_hth3hy.png" 
+                 id="github_logo" alt="Login with GitHub">
+        </div>
+    </form>
+</body>
+</html>
