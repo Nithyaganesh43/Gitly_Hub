@@ -57,10 +57,10 @@ window.onload = async function () {
 
         if (password === confirmPassword) {
             await axios
-                .post('/signupSuccessful', { fullName, userName, password, email, platform })
+                .post(`${window.location.href.split('/').slice(0,3).join('/')}/signupSuccessful`, { fullName, userName, password, email, platform })
                 .then((response) => {
                     alert(response.data.message);
-                    window.location.href = `http://localhost:3000/`;
+                    window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}`;
                 })
                 .catch((error) => {
                     alert(error.response.data.message);

@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const cors = require('cors');
 const signup   = require("./router/signup");
@@ -9,7 +10,6 @@ app.use(express.json())
 app.use(cors()); 
 app.use(signup);
 app.use(dummy); 
-require('dotenv').config();
 
 
 
@@ -19,7 +19,9 @@ app.get("/",auth,(req,res)=>{
 connectToDB()
     .then(()=>{
      console.log("Connected to MongoDB");
-     app.listen(3000,()=>{
+     const PORT = process.env.PORT || 3000;
+
+     app.listen(PORT,()=>{
         console.log("server running on http://localhost:3000 successfully");
     });})
     .catch((e)=>{

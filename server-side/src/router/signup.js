@@ -1,3 +1,5 @@
+// D:\projects\Gitly\Gitly\server-side\src\router\signup.js
+
 const express = require("express");
 const passport = require("passport"); 
 require('dotenv').config();
@@ -12,7 +14,7 @@ const {auth , tempAuth }= require("../middlewares/loginAuth");
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;  
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;   
 const validator = require("validator");
 const mail = require("../helper/mail");
 const validateUserInfromations = require("../helper/validateUserInfromations");
@@ -20,6 +22,7 @@ const jwt = require("jsonwebtoken");
 signup.use(cookieParser());
 signup.use(passport.initialize());
 signup.use(express.static(path.join(__dirname,"..", '..', '..', 'client-side', 'src')));
+
 signup.use(express.json());
   
 passport.use(

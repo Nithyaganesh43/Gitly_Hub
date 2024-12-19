@@ -35,7 +35,7 @@ function butt(opt) {
 async function getOTP() {
     window.localStorage.setItem("email", email);
     email = document.getElementById("email").value;
-    await axios.post('http://localhost:3000/forgotPasswordGetOtp', { email })
+    await axios.post(`${window.location.href.split('/').slice(0,3).join('/')}/forgotPasswordGetOtp`, { email })
         .then(response => {
             alert(response.data.message);
             operation = "submit";
@@ -48,7 +48,7 @@ async function getOTP() {
         .catch(error => {
             if (error.response.data.message === "Email not found pls SignUp") {
                 alert(error.response.data.message);
-                window.location.href = 'http://localhost:3000/signup';
+                window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}/signup`;
             }
         });
 }
@@ -60,7 +60,7 @@ async function submitOTP() {
         return;
     }
     email = window.localStorage.getItem("email");
-    await axios.post('http://localhost:3000/forgotPasswordVerifyOtp', { otp, email })
+    await axios.post(`${window.location.href.split('/').slice(0,3).join('/')}/forgotPasswordVerifyOtp`, { otp, email })
         .then(response => {
             alert(response.data.message);
             operation = "reset";
@@ -82,11 +82,11 @@ async function submitOTP() {
 }
 
 function googleLoginButton() {
-    window.location.href = 'http://localhost:3000/auth/google';
+    window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}/auth/google`;
 }
 
 function githubLoginButton() {
-    window.location.href = 'http://localhost:3000/auth/github';
+    window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}/auth/github`;
 }
 
 async function resetPassword() {
@@ -96,10 +96,10 @@ async function resetPassword() {
         alert("Passwords do not match.");
         return;
     }
-    await axios.post('http://localhost:3000/resetPassword', { password: newPassword })
+    await axios.post(`${window.location.href.split('/').slice(0,3).join('/')}/resetPassword`, { password: newPassword })
         .then(response => {
             alert(response.data.message);
-            window.location.href = "http://localhost:3000/";
+            window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}/`;
         })
         .catch(error => {
             alert(error.response.data.message);
