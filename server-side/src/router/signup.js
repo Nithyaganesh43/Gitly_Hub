@@ -393,8 +393,8 @@ signup.post("/resetPassword", async (req, res) => {
 //api which is called by client for  authentication it just redirects the user to auth page
 signup.get("/userAuth",(req,res)=>{
 
-  const filePath = path.join(__dirname,"..", "..","..","client-side","src","authpage","authindex.html");
-  res.sendFile(filePath);
+  res.redirect(`https://676444110170bb69a97e9fcf--gitly-hub.netlify.app/src/authpage/authindex.html`); 
+ 
 })
 
 //is the user is a new user he/she must give the information about them to create a new account here and 
@@ -426,7 +426,16 @@ res.sendFile(filePath);
 //redirect user to home oage if and only the user is authorized
 signup.get("/home",auth,async (req,res)=>{ 
 
-    const filePath = path.join(__dirname, "..","..","..","client-side","src","homepage","home.html");
+    const filePath = signup.get("/forgotPassword", (req, res) => {
+  const filePath = path.join(__dirname,"..", "..","..","client-side","src","authpage","forgotPassword.html");
+res.sendFile(filePath);
+});
+  
+//redirect user to home oage if and only the user is authorized
+signup.get("/home",auth,async (req,res)=>{ 
+ 
+  res.redirect(`https://676444110170bb69a97e9fcf--gitly-hub.netlify.app/src/homepage/home.html`); 
+});
      
     res.sendFile(filePath); 
 }) 

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome in 100 Languages</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .welcome {
+      font-size: 3em;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome" id="welcomeText"></div>
+
+  <script>
+    const languages = [
+    "வணக்கம் (Tamil)", 
+      "Welcome (English)", 
+      "स्वागत है (Hindi)", 
+      "Bienvenido (Spanish)", 
+      "Willkommen (German)", 
+      "Bienvenue (French)", 
+      "Benvenuto (Italian)", 
+      "أهلاً وسهلاً (Arabic)", 
+      "환영합니다 (Korean)", 
+      "Welkom (Dutch)", 
+      "Välkommen (Swedish)",
+      "ยินดีต้อนรับ (Thai)", 
+      "歓迎 (Japanese)", 
+      "Добро пожаловать (Russian)", 
+      "ברוך הבא (Hebrew)", 
+      "Benvenuti (Italian)", 
+      "Fáilte (Irish)", 
+      "Hoşgeldiniz (Turkish)", 
+      "Добродошли (Serbian)", 
+      "Xoş gəlmisiniz (Azerbaijani)", 
+      "Vítejte (Czech)", 
+      "Selamat datang (Malay/Indonesian)", 
+      "欢迎 (Chinese)", 
+      "မင်္ဂလာပါ (Burmese)", 
+      "স্বাগতম (Bengali)", 
+      "आपका स्वागत है (Marathi)", 
+      "హలో (Telugu)", 
+      "ನಮಸ್ಕಾರ (Kannada)", 
+      "वसंत (Gujarati)", 
+      "สวัสดี (Thai)",  
+      "қош келдіңіз (Kazakh)", 
+      "خوش آمدید (Persian)", 
+      "स्वागतम (Hindi)", 
+      "Xịn chào (Vietnamese)", 
+      "মারহাবা (Urdu)", 
+      "വന്നാൽ (Malayalam)", 
+      "Azərbaycanca (Azerbaijani)", 
+      "귀환 (Korean)", 
+      "कसे (Marathi)"
+    ];
+  
+    let index = 0;
+    const welcomeText = document.getElementById("welcomeText");
+
+    function typeWriter(text, i = 0) {
+      if (i < text.length) {
+        welcomeText.textContent += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1), 100);
+      } else {
+        setTimeout(() => deleteText(text.length), 2000);
+      }
+    }
+
+    function deleteText(length, i = length) {
+      if (i > 0) {
+        welcomeText.textContent = welcomeText.textContent.slice(0, -1);
+        setTimeout(() => deleteText(length, i - 1), 50);
+      } else {
+        index = (index + 1) % languages.length;
+        setTimeout(() => typeWriter(languages[index]), 100);  
+      }
+    }
+
+    typeWriter(languages[index]);
+  </script>
+</body>
+</html>

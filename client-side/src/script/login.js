@@ -6,9 +6,9 @@ async function login() {
             alert("Username and password must be at least 8 characters");
             return;
         }
-        await axios.post(`${window.location.href.split('/').slice(0,3).join('/')}/userLogedIn`, { userName, password })
+        await axios.post(`http://localhost:3000/userLogedIn`, { userName, password })
             .then(() => {
-                location.href = `${window.location.href.split('/').slice(0,3).join('/')}/`;
+                location.href = `http://localhost:3000/`;
             })
             .catch(() => {
                 alert("Login failed");
@@ -25,13 +25,13 @@ document.addEventListener("keydown", (e) => {
 });
 
 function forgotPassword() {
-    location.href = `${window.location.href.split('/').slice(0,3).join('/')}/forgotPassword`;
+    location.href = `http://localhost:3000/forgotPassword`;
 }
 
 function googleLoginButton() {
-    window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}/auth/google`;
+    window.location.href = `http://localhost:3000/auth/google`;
 }
 
 function githubLoginButton() {
-    window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}/auth/github`;
+    window.location.href = `http://localhost:3000/auth/github`;
 }

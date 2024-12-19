@@ -1,11 +1,11 @@
 function login() {
     
-    window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}/login`;
+    window.location.href = `http://localhost:3000/login`;
 }
 
 function signup() {
     
-    window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}/signup`;
+    window.location.href = `http://localhost:3000/signup`;
 }
 
 

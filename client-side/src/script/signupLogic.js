@@ -2,11 +2,11 @@ let isRequestInProgress = false;
 var email;
 
 function googleLoginButton() {
-    window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}/auth/google`;
+    window.location.href = `http://localhost:3000/auth/google`;
 }
 
 function githubLoginButton() {
-    window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}/auth/github`;
+    window.location.href = `http://localhost:3000/auth/github`;
 }
 
 async function getOTP() {
@@ -26,7 +26,7 @@ async function getOTP() {
     otpButton.innerText = "Requesting...";
 
     try {
-        const response = await axios.post(`${window.location.href.split('/').slice(0,3).join('/')}/auth/gitly`, { email });
+        const response = await axios.post(`http://localhost:3000/auth/gitly`, { email });
         alert(response.data.message);
 
         document.getElementById("signupBOX").innerHTML = `
@@ -57,10 +57,10 @@ function submitOTP() {
         return;
     }
 
-    axios.post(`${window.location.href.split('/').slice(0,3).join('/')}/auth/gitly/verifyotp`, { otp })
+    axios.post(`http://localhost:3000/auth/gitly/verifyotp`, { otp })
         .then((response) => {
             alert(response.data.message);
-            window.location.href = `${window.location.href.split('/').slice(0,3).join('/')}/newUserInfo?email=${email}&platform=gitly`;
+            window.location.href = `http://localhost:3000/newUserInfo?email=${email}&platform=gitly`;
         })
         .catch((error) => {
             alert(error.response?.data?.message || "Invalid OTP. Please try again.");
