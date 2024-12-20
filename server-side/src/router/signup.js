@@ -22,7 +22,8 @@ const jwt = require("jsonwebtoken");
 signup.use(cookieParser());
 signup.use(passport.initialize());
 signup.use(express.static(path.join(__dirname,"..", '..', '..', 'client-side', 'src')));
-
+const cors = require('cors');
+signup.use(cors());
 signup.use(express.json());
   
 passport.use(
