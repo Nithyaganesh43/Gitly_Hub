@@ -400,45 +400,36 @@ signup.get("/userAuth",(req,res)=>{
 //is the user is a new user he/she must give the information about them to create a new account here and 
 //user need to be authorized to use this api
 signup.get("/newUserInfo",tempAuth, (req, res) => {
-
-  const filePath = path.join(__dirname,"..", "..","..","client-side","src","authpage","newUserInfo.html");
-res.sendFile(filePath);
+  res.redirect(`https://676444110170bb69a97e9fcf--gitly-hub.netlify.app/src/authpage/newUserInfo.html`); 
+  
 });
 
 //redirect user to login page
 signup.get("/login", (req, res) => {
-  const filePath = path.join(__dirname,"..", "..","..","client-side","src","authpage","login.html");
-res.sendFile(filePath);
+  res.redirect(`https://676444110170bb69a97e9fcf--gitly-hub.netlify.app/src/authpage/login.html`); 
+   
 });
 
 //redirect user to signup page
 signup.get("/signup", (req, res) => {
-  const filePath = path.join(__dirname,"..", "..","..","client-side","src","authpage","signup.html");
-res.sendFile(filePath);
+  res.redirect(`https://676444110170bb69a97e9fcf--gitly-hub.netlify.app/src/authpage/signup.html`); 
+    
 });
 
 //redirect user to forgotpassword page
-signup.get("/forgotPassword", (req, res) => {
-  const filePath = path.join(__dirname,"..", "..","..","client-side","src","authpage","forgotPassword.html");
-res.sendFile(filePath);
+signup.get("/forgotPassword", (req, res) => { 
+   res.redirect(`https://676444110170bb69a97e9fcf--gitly-hub.netlify.app/src/authpage/forgotPassword.html`); 
+     
 });
   
-//redirect user to home oage if and only the user is authorized
-signup.get("/home",auth,async (req,res)=>{ 
-
-    const filePath = signup.get("/forgotPassword", (req, res) => {
-  const filePath = path.join(__dirname,"..", "..","..","client-side","src","authpage","forgotPassword.html");
-res.sendFile(filePath);
-});
-  
+ 
 //redirect user to home oage if and only the user is authorized
 signup.get("/home",auth,async (req,res)=>{ 
  
   res.redirect(`https://676444110170bb69a97e9fcf--gitly-hub.netlify.app/src/homepage/home.html`); 
 });
      
-    res.sendFile(filePath); 
-}) 
+ 
 
  
  
