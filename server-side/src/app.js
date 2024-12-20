@@ -10,8 +10,7 @@ const connectToDB = require("./config/database");
 const {auth }=require("./middlewares/loginAuth"); 
 app.use(express.json())
 app.use(cors()); 
-app.use(signup);
-app.use(dummy); 
+app.use(signup); 
 
 app.get("/get",(req,res)=>{ 
     res.send(`ok`);
