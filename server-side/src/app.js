@@ -12,7 +12,7 @@ app.use(signup);
 app.use(dummy); 
 
 
-app.get("/get",auth,(req,res)=>{ 
+app.get("/get",(req,res)=>{ 
     res.send(`ok`);
 }); 
 
