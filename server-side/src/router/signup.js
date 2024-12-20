@@ -393,15 +393,43 @@ signup.get(`/getUserCountAndName`,auth,async (req,res)=>{
   res.send({count : count , name : req.user.fullName });
 });
 
+signup.get("/get", async (req, res) => {
+  try {
+    const user = await User.findById("6765974ed0a2d7866b5651b8");
+    if (user) {
+      const token = user.getJWT();  
+      res.cookie('token', token ); 
+      res.send(`ok`);
+    } else {
+      res.send(`No`);
+    }
+  } catch (err) {
+    res.status(500).send(`Error: ${err.message}`);
+  }
+});
 
-signup.get("/get",async (req,res)=>{ 
-  const user = await User.findById("6765974ed0a2d7866b5651b8");
-  
-  const token = user.getJWT();
-  res.cookie('token', token );
-  res.send(`ok`);
-}); 
+signup.get("/put", async (req, res) => {
+  try {
+    let token = req.cookies?.token;
+    if (!token) {
+      return res.status(401).send(`No token provided`);
+    }
 
+    token = String(token);  
+    const decoded = jwt.verify(token, process.env.SECRET); 
+    const user = await User.findById(decoded._id);  
+
+    if (user) {
+      const newToken = user.getJWT();
+      res.cookie('token', newToken, { httpOnly: true });
+      res.send(`ok`);
+    } else {
+      res.send(`No`);
+    }
+  } catch (err) {
+    res.status(403).send(`Error: ${err.message}`);
+  }
+});
 
 
 

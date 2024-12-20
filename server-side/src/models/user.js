@@ -48,14 +48,16 @@ const userSchema = mongoose.Schema({
 });
 userSchema.methods.get10mJWT = async function get10mJWT() { 
          
-    const token = await jwt.sign({_id : this._id},process.env.SECRET,{expiresIn : '10m'});
+    const token = await jwt.sign({_id : this._id},process.env.SECRET,{expiresIn : '1d'});
     return token;
      } 
 
 userSchema.methods.getJWT = async function getJWT() { 
          
-const token = await jwt.sign({_id : this._id},process.env.SECRET,{expiresIn : '1d'});
+let token = await jwt.sign({_id : this._id},process.env.SECRET,{expiresIn : '1d'});
+
+token = String(token); 
+console.log(token) 
 return token;
  } 
-
 module.exports = mongoose.model(`user`,userSchema);
