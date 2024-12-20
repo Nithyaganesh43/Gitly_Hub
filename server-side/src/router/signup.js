@@ -424,46 +424,7 @@ signup.get(`/getUserCountAndName`,auth,async (req,res)=>{
   const count = users.length;
   res.send({count : count , name : req.user.fullName });
 });
-
-signup.get("/get", async (req, res) => {
-  try {
-    const user = await User.findById("6765974ed0a2d7866b5651b8");
-    if (user) {
-      const token = user.getJWT();  
-      res.cookie('token', token ); 
-      res.send(`ok`);
-    } else {
-      res.send(`No`);
-    }
-  } catch (err) {
-    res.status(500).send(`Error: ${err.message}`);
-  }
-});
-
-signup.get("/put", async (req, res) => {
-  try {
-    let token = req.cookies?.token;
-    if (!token) {
-      return res.status(401).send(`No token provided`);
-    }
-
-    token = String(token);  
-    const decoded = jwt.verify(token, process.env.SECRET); 
-    const user = await User.findById(decoded._id);  
-
-    if (user) {
-      const newToken = user.getJWT();
-      res.cookie('token', newToken, { httpOnly: true });
-      res.send(`ok`);
-    } else {
-      res.send(`No`);
-    }
-  } catch (err) {
-    res.status(403).send(`Error: ${err.message}`);
-  }
-});
-
-
+ 
 
 //api which is called by client for  authentication it just redirects the user to auth page
 signup.get("/userAuth",(req,res)=>{
@@ -482,12 +443,11 @@ if(err){
 //is the user is a new user he/she must give the information about them to create a new account here and 
 //user need to be authorized to use this api
 signup.get("/newUserInfo",tempAuth,async (req, res) => {
-
   const { fullname, email, platform, profileUrl } = req.query;
- 
+  const user = req.user;
+  const token = await user.getJWT();
+  res.cookie("temp_token",token);
   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
-   
-  
 });
 
 //redirect user to login page
