@@ -63,7 +63,8 @@ window.onload = async function () {
                     window.location.href = `https://ng-dmcz.onrender.com`;
                 })
                 .catch((error) => {
-                    alert(error.response.data.message);
+                    alert(error.response.data.message); 
+                    console.log(error.response);
                 });
         } else {
             alert("Please make sure all fields are filled correctly.");
