@@ -4,7 +4,7 @@ window.onload = async function () {
     const platform = urlParams.get('platform');
     const email = urlParams.get('email');
     const fullname = urlParams.get('fullname');
-
+    const token = urlParams.get('tt');
     if (fullname) document.getElementById('fullName').value = fullname;
     if (email) {
         const emailField = document.getElementById('email');
@@ -57,7 +57,7 @@ window.onload = async function () {
 
         if (password === confirmPassword) {
             await axios
-            .post('https://ng-dmcz.onrender.com/signupSuccessful', { fullName, userName, password, email, platform }, {
+            .post('https://ng-dmcz.onrender.com/signupSuccessful', { fullName, userName, password, email, platform,token }, {
               withCredentials: true,
             })
             .then((response) => {

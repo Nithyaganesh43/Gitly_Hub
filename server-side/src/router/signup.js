@@ -248,17 +248,16 @@ signup.post("/auth/gitly",async (req,res)=>{
 
 signup.post("/signupSuccessful",  async (req, res) => {
   
-  try{ 
- const tokenByUser = req.cookies?.temp_token;
-    if(!tokenByUser){
-      throw new Error("Token Not Found");
+  try{  
+    const {fullName, userName , password  ,platform , email,token }= req.body;
+    if(!token){
+      throw new Error("Token Not Found...");
     }
-   const userid = await jwt.verify(tokenByUser , process.env.SECRET);
+   const userid = await jwt.verify(token , process.env.SECRET);
     const user = await User.findById( userid );
      if(!user){
       throw new Error("login with github or google")
-     }  
-    const {fullName, userName , password  ,platform , email }= req.body;
+     }   
     await validateUserInfromations(fullName , userName , password,platform , email );  
    
 
@@ -443,11 +442,8 @@ if(err){
 //is the user is a new user he/she must give the information about them to create a new account here and 
 //user need to be authorized to use this api
 signup.get("/newUserInfo",tempAuth,async (req, res) => {
-  const { fullname, email, platform, profileUrl } = req.query;
-  const user = req.user;
-  const token = await user.getJWT();
-  res.cookie("temp_token",token);
-  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
+  const { fullname, email, platform, profileUrl } = req.query; 
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}&tt=${token}`);
 });
 
 //redirect user to login page
