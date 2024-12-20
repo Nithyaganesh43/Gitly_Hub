@@ -248,7 +248,9 @@ signup.post("/auth/gitly",async (req,res)=>{
 
 signup.post("/signupSuccessful",  async (req, res) => {
   
-  try{     const {fullName, userName , password  ,platform , email ,token}= req.body;
+  try{     
+    
+    const {fullName, userName , password  ,platform , email ,token}= req.body;
  
     if(!token){
       throw new Error("Token Not Found...");
@@ -259,7 +261,7 @@ signup.post("/signupSuccessful",  async (req, res) => {
       throw new Error("login with github or google")
      }  
 
-    await validateUserInfromations(fullName , userName , password,platform , email );  
+    await validateUserInfromations(fullName , userName , password , platform , email );  
    
 
   if(user){
@@ -274,7 +276,7 @@ signup.post("/signupSuccessful",  async (req, res) => {
     
     let token = await user.getJWT();
     res.cookie("token",token);
-    res.send({message:"successfully user registred"});
+    res.send({message:"successfully user registred"   });
    
 }
 

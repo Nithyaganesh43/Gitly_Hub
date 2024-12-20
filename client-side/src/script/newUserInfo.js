@@ -61,8 +61,8 @@ window.onload = async function () {
               withCredentials: true,
             })
             .then((response) => {
-              alert(response.data.message);
-              window.location.href = `https://ng-dmcz.onrender.com`;
+              alert(response.data.message); 
+              window.location.href = `https://nithyaganesh.netlify.app/src/homePage/home.html`;
             })
             .catch((error) => {
               console.log(error);
