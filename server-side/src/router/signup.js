@@ -228,12 +228,21 @@ signup.post("/auth/gitly",async (req,res)=>{
 //after the new user giving the information validation takes place then we are updating the user data
 //and re-writing the token for next one day
 
-signup.post("/signupSuccessful",tempAuth,  async (req, res) => {
-  console.log("ooho")
+signup.post("/signupSuccessful",  async (req, res) => {
+  
   try{ 
+ const tokenByUser = req.cookies?.temp_token;
+    if(!tokenByUser){
+      throw new Error("Token Not Found");
+    }
+   const userid = await jwt.verify(tokenByUser , process.env.SECRET);
+    const user = await User.findById( userid );
+     if(!user){
+      throw new Error("login with github or google")
+     }  
     const {fullName, userName , password  ,platform , email }= req.body;
     await validateUserInfromations(fullName , userName , password,platform , email );  
-  const user = req.user;
+   
 
   if(user){
     if(user.fullName && user.passport && user.userName){
