@@ -1,11 +1,11 @@
 function login() {
     
-    window.location.href = `http://localhost:3000/login`;
+    window.location.href = `https://gitly-hub-9tmi.onrender.com/login`;
 }
 
 function signup() {
     
-    window.location.href = `http://localhost:3000/signup`;
+    window.location.href = `https://gitly-hub-9tmi.onrender.com/signup`;
 }
 
 

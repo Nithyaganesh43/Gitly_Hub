@@ -57,10 +57,10 @@ window.onload = async function () {
 
         if (password === confirmPassword) {
             await axios
-                .post(`http://localhost:3000/signupSuccessful`, { fullName, userName, password, email, platform })
+                .post(`https://gitly-hub-9tmi.onrender.com/signupSuccessful`, { fullName, userName, password, email, platform })
                 .then((response) => {
                     alert(response.data.message);
-                    window.location.href = `http://localhost:3000`;
+                    window.location.href = `https://gitly-hub-9tmi.onrender.com`;
                 })
                 .catch((error) => {
                     alert(error.response.data.message);

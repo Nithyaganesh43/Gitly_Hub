@@ -2,11 +2,11 @@ let isRequestInProgress = false;
 var email;
 
 function googleLoginButton() {
-    window.location.href = `http://localhost:3000/auth/google`;
+    window.location.href = `https://gitly-hub-9tmi.onrender.com/auth/google`;
 }
 
 function githubLoginButton() {
-    window.location.href = `http://localhost:3000/auth/github`;
+    window.location.href = `https://gitly-hub-9tmi.onrender.com/auth/github`;
 }
 
 async function getOTP() {
@@ -26,7 +26,7 @@ async function getOTP() {
     otpButton.innerText = "Requesting...";
 
     try {
-        const response = await axios.post(`http://localhost:3000/auth/gitly`, { email });
+        const response = await axios.post(`https://gitly-hub-9tmi.onrender.com/auth/gitly`, { email });
         alert(response.data.message);
 
         document.getElementById("signupBOX").innerHTML = `
@@ -57,10 +57,10 @@ function submitOTP() {
         return;
     }
 
-    axios.post(`http://localhost:3000/auth/gitly/verifyotp`, { otp })
+    axios.post(`https://gitly-hub-9tmi.onrender.com/auth/gitly/verifyotp`, { otp })
         .then((response) => {
             alert(response.data.message);
-            window.location.href = `http://localhost:3000/newUserInfo?email=${email}&platform=gitly`;
+            window.location.href = `https://gitly-hub-9tmi.onrender.com/newUserInfo?email=${email}&platform=gitly`;
         })
         .catch((error) => {
             alert(error.response?.data?.message || "Invalid OTP. Please try again.");

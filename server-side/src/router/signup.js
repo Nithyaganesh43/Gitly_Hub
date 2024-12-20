@@ -415,7 +415,6 @@ signup.get("/signup", (req, res) => {
   res.redirect(`https://676444110170bb69a97e9fcf--gitly-hub.netlify.app/src/authpage/signup.html`); 
     
 });
-
 //redirect user to forgotpassword page
 signup.get("/forgotPassword", (req, res) => { 
    res.redirect(`https://676444110170bb69a97e9fcf--gitly-hub.netlify.app/src/authpage/forgotPassword.html`); 
