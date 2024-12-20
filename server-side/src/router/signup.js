@@ -224,7 +224,7 @@ signup.post("/auth/gitly",async (req,res)=>{
 //after the new user giving the information validation takes place then we are updating the user data
 //and re-writing the token for next one day
 
-signup.post("/signupSuccessful",auth,  async (req, res) => {
+signup.post("/signupSuccessful",tempAuth,  async (req, res) => {
   
   try{ 
     const {fullName, userName , password  ,platform , email }= req.body;
@@ -235,7 +235,7 @@ signup.post("/signupSuccessful",auth,  async (req, res) => {
     if(user.fullName && user.passport && user.userName){
       throw new Error("Already registed the informations");
     }
-    const updatedStatus = await User.findByIdAndUpdate(userid,{fullName:fullName, userName:userName , password:password});
+    const updatedStatus = await User.findByIdAndUpdate(user._id,{fullName:fullName, userName:userName , password:password});
     if (!updatedStatus) {
       throw new Error("User not found or update failed.");
   }
@@ -407,9 +407,7 @@ signup.get("/userAuth",(req,res)=>{
 signup.get("/newUserInfo",tempAuth,async (req, res) => {
 
   const { fullname, email, platform, profileUrl } = req.query;
-
-  const token = await req.user.getJWT();
-  res.cookie("token",token);
+ 
   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
    
   
