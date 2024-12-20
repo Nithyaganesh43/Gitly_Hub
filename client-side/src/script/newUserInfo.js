@@ -57,10 +57,10 @@ window.onload = async function () {
 
         if (password === confirmPassword) {
             await axios
-                .post(`https://gitly-hub-9tmi.onrender.com/signupSuccessful`, { fullName, userName, password, email, platform })
+                .post(`https://ng-dmcz.onrender.com/signupSuccessful`, { fullName, userName, password, email, platform })
                 .then((response) => {
                     alert(response.data.message);
-                    window.location.href = `https://gitly-hub-9tmi.onrender.com`;
+                    window.location.href = `https://ng-dmcz.onrender.com`;
                 })
                 .catch((error) => {
                     alert(error.response.data.message);

@@ -1,11 +1,11 @@
 function login() {
     
-    window.location.href = `https://gitly-hub-9tmi.onrender.com/login`;
+    window.location.href = `https://ng-dmcz.onrender.com/login`;
 }
 
 function signup() {
     
-    window.location.href = `https://gitly-hub-9tmi.onrender.com/signup`;
+    window.location.href = `https://ng-dmcz.onrender.com/signup`;
 }
 
 

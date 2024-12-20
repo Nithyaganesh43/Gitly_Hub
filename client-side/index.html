@@ -81,12 +81,12 @@
     }
 
     async function checkServer() {
-      const serverUrl = "https://gitly-hub-9tmi.onrender.com/get";
+      const serverUrl = "https://ng-dmcz.onrender.com/get";
       while (true) {
         try {
           const res = await axios.get(serverUrl);
           if (res.data === "ok") {
-            window.location.href = "https://gitly-hub-9tmi.onrender.com";
+            window.location.href = "https://ng-dmcz.onrender.com";
             break;
           }
         } catch (e) { 

@@ -35,7 +35,7 @@ function butt(opt) {
 async function getOTP() {
     window.localStorage.setItem("email", email);
     email = document.getElementById("email").value;
-    await axios.post(`https://gitly-hub-9tmi.onrender.com/forgotPasswordGetOtp`, { email })
+    await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordGetOtp`, { email })
         .then(response => {
             alert(response.data.message);
             operation = "submit";
@@ -48,7 +48,7 @@ async function getOTP() {
         .catch(error => {
             if (error.response.data.message === "Email not found pls SignUp") {
                 alert(error.response.data.message);
-                window.location.href = `https://gitly-hub-9tmi.onrender.com/signup`;
+                window.location.href = `https://ng-dmcz.onrender.com/signup`;
             }
         });
 }
@@ -60,7 +60,7 @@ async function submitOTP() {
         return;
     }
     email = window.localStorage.getItem("email");
-    await axios.post(`https://gitly-hub-9tmi.onrender.com/forgotPasswordVerifyOtp`, { otp, email })
+    await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordVerifyOtp`, { otp, email })
         .then(response => {
             alert(response.data.message);
             operation = "reset";
@@ -82,11 +82,11 @@ async function submitOTP() {
 }
 
 function googleLoginButton() {
-    window.location.href = `https://gitly-hub-9tmi.onrender.com/auth/google`;
+    window.location.href = `https://ng-dmcz.onrender.com/auth/google`;
 }
 
 function githubLoginButton() {
-    window.location.href = `https://gitly-hub-9tmi.onrender.com/auth/github`;
+    window.location.href = `https://ng-dmcz.onrender.com/auth/github`;
 }
 
 async function resetPassword() {
@@ -96,10 +96,10 @@ async function resetPassword() {
         alert("Passwords do not match.");
         return;
     }
-    await axios.post(`https://gitly-hub-9tmi.onrender.com/resetPassword`, { password: newPassword })
+    await axios.post(`https://ng-dmcz.onrender.com/resetPassword`, { password: newPassword })
         .then(response => {
             alert(response.data.message);
-            window.location.href = `https://gitly-hub-9tmi.onrender.com/`;
+            window.location.href = `https://ng-dmcz.onrender.com/`;
         })
         .catch(error => {
             alert(error.response.data.message);
