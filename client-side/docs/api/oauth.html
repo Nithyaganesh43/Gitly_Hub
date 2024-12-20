@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #444;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #555;
+            margin-top: 20px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .code-block {
+            background: #f8f8f8;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OAuth API Documentation</h1>
+        </header>
+        
+        <main>
+            <section>
+                <h2>Introduction</h2>
+                <p>This document provides an overview of the OAuth API used by our application. The API allows users to authenticate securely using OAuth 2.0, enabling seamless access to the app's features.</p>
+            </section>
+
+            <section>
+                <h2>Authentication Flow</h2>
+                <p>OAuth is used to authenticate users and provide access to their basic profile information. Below is a step-by-step guide on how the authentication flow works:</p>
+                
+                <h3>1. Request Authorization</h3>
+                <p>To initiate the OAuth authentication process, your app needs to redirect the user to our authorization URL:</p>
+                <pre class="code-block">https://gitly-hub-9tmi.onrender.com/auth/google</pre>
+                 
+                <h3>2. Authorization Grant</h3>
+                <p>If the user consents, they will be redirected back to your app's <strong>redirect_uri</strong> with an authorization code. Example redirect:</p>
+                <pre class="code-block">https://gitly-hub-9tmi.onrender.com/callback?code=AUTHORIZATION_CODE</pre>
+
+                <h3>3. Exchange Authorization Code for Access Token</h3>
+                <p>Next, your app must exchange the authorization code for an access token by making a POST request to:</p>
+                <pre class="code-block">https://gitly-hub-9tmi.onrender.com/oauth/token</pre>
+                 
+                <h3>4. Access Protected Resources</h3>
+                <p>Once you have the access token, you can use it to access the user's profile and other protected resources by including the token in the Authorization header of your requests.</p>
+                <pre class="code-block">Authorization: Bearer ACCESS_TOKEN</pre>
+            </section>
+
+            <section>
+                <h2>API Endpoints</h2>
+                <p>Here are the key endpoints for interacting with OAuth:</p>
+                
+                <h3>1. Authorize</h3>
+                <p>Endpoint to initiate the OAuth authentication process.</p>
+                <pre class="code-block">GET https://gitly-hub-9tmi.onrender.com/oauth/authorize</pre>
+                <p>Parameters: <code>client_id, redirect_uri, scope, response_type</code></p>
+                
+                <h3>2. Token</h3>
+                <p>Endpoint to exchange the authorization code for an access token.</p>
+                <pre class="code-block">POST https://gitly-hub-9tmi.onrender.com/oauth/token</pre>
+                <p>Parameters: <code>code, client_id, client_secret, redirect_uri, grant_type</code></p>
+                
+                <h3>3. User Profile</h3>
+                <p>Endpoint to fetch the user's basic profile data.</p>
+                <pre class="code-block">GET https://gitly-hub-9tmi.onrender.com/api/user</pre>
+                <p>Headers: <code>Authorization: Bearer ACCESS_TOKEN</code></p>
+            </section>
+
+            <section>
+                <h2>Common Errors</h2>
+                <p>If an error occurs during the OAuth flow, you may receive an error response with the following fields:</p>
+                <ul>
+                    <li><strong>error</strong> - A short description of the error (e.g., "invalid_request").</li>
+                    <li><strong>error_description</strong> - A more detailed description of the error.</li>
+                </ul>
+                <p>Example error response:</p>
+                <pre class="code-block">
+{
+    "error": "invalid_request",
+    "error_description": "Missing required parameter: client_id"
+}
+                </pre>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Nithya Ganesh . All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
