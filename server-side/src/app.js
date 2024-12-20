@@ -15,7 +15,7 @@ app.use(dummy);
 app.get("/get",(req,res)=>{ 
     res.send(`ok`);
 }); 
-
+ 
 app.get("/",auth,(req,res)=>{ 
     res.redirect(`/home`);
 }); 
