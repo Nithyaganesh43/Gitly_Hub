@@ -421,10 +421,13 @@ signup.post("/resetPassword", async (req, res) => {
 
 
 //20-12-2024 get number of users 
-signup.get(`/getUserCountAndName`,auth,async (req,res)=>{
+signup.get(`/getUserCountAndName` ,async (req,res)=>{
+  const tt = req.query?.tt;
+  const userid = await jwt.verify(tt , process.env.SECRET);
+  const user = await User.findById( userid );
   const users = await User.find({});
   const count = users.length;
-  res.send({count : count , name : req.user.fullName });
+  res.send({count : count , name : user.fullName });
 });
  //20-12-2024 loading ku ok
 signup.get(`/get `,auth,async (req,res)=>{ 
