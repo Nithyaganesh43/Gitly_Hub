@@ -390,6 +390,16 @@ signup.post("/resetPassword", async (req, res) => {
 }
 });
 
+
+//20-12-2024 get number of users 
+app.get(`/getUserCountAndName`,auth,async (req,res)=>{
+  const users = await User.find({});
+  const count = users.length;
+  res.send({count : count , name : req.user.fullName });
+})
+
+
+
 //api which is called by client for  authentication it just redirects the user to auth page
 signup.get("/userAuth",(req,res)=>{
 
