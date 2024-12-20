@@ -224,7 +224,7 @@ signup.post("/auth/gitly",async (req,res)=>{
 //after the new user giving the information validation takes place then we are updating the user data
 //and re-writing the token for next one day
 
-signup.post("/signupSuccessful",auth,  async (req, res) => {
+signup.post("/signupSuccessful",  async (req, res) => {
   
   try{ 
     const {fullName, userName , password  ,platform , email }= req.body;
