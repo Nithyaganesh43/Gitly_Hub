@@ -57,7 +57,9 @@ window.onload = async function () {
 
         if (password === confirmPassword) {
             await axios
-                .post(`https://ng-dmcz.onrender.com/signupSuccessful`, { fullName, userName, password, email, platform })
+                .post(`https://ng-dmcz.onrender.com/signupSuccessful`, { fullName, userName, password, email, platform },{
+                    withCredentials: true,
+                })
                 .then((response) => {
                     alert(response.data.message);
                     window.location.href = `https://ng-dmcz.onrender.com`;

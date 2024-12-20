@@ -9,7 +9,10 @@ const signup   = require("./router/signup");
 const connectToDB = require("./config/database");  
 const {auth }=require("./middlewares/loginAuth"); 
 app.use(express.json())
-app.use(cors()); 
+app.use(cors({
+  origin: 'https://nithyaganesh.netlify.app/',  
+  credentials: true,
+}));
 app.use(signup); 
 
 

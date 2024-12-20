@@ -23,7 +23,10 @@ signup.use(cookieParser());
 signup.use(passport.initialize());
 signup.use(express.static(path.join(__dirname,"..", '..', '..', 'client-side', 'src')));
 const cors = require('cors');
-signup.use(cors());
+signup.use(cors({
+  origin: 'https://nithyaganesh.netlify.app/',  
+  credentials: true,
+}));
 signup.use(express.json());
   
 passport.use(
@@ -437,9 +440,16 @@ signup.get("/put", async (req, res) => {
 
 //api which is called by client for  authentication it just redirects the user to auth page
 signup.get("/userAuth",(req,res)=>{
-
+const err = req.query?.err;
+if(err){
+  
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/authindex.html?err=${err}`); 
+ 
+}else{
+  
   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/authindex.html`); 
  
+}
 })
 
 //is the user is a new user he/she must give the information about them to create a new account here and 

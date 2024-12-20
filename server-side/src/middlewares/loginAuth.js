@@ -51,7 +51,7 @@ req.user=user;
      next(); 
   }
 catch(err){ 
-  res.redirect(`/userAuth`);
+  res.redirect(`/userAuth?err=${err}`);
 
   }
 }
