@@ -393,31 +393,31 @@ signup.post("/resetPassword", async (req, res) => {
 //api which is called by client for  authentication it just redirects the user to auth page
 signup.get("/userAuth",(req,res)=>{
 
-  res.redirect(`https://gitlyhub.netlify.app/src/authpage/authindex.html`); 
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/authindex.html`); 
  
 })
 
 //is the user is a new user he/she must give the information about them to create a new account here and 
 //user need to be authorized to use this api
 signup.get("/newUserInfo",tempAuth, (req, res) => {
-  res.redirect(`https://gitlyhub.netlify.app/src/authpage/newUserInfo.html`); 
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html`); 
   
 });
 
 //redirect user to login page
 signup.get("/login", (req, res) => {
-  res.redirect(`https://gitlyhub.netlify.app/src/authpage/login.html`); 
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/login.html`); 
    
 });
 
 //redirect user to signup page
 signup.get("/signup", (req, res) => {
-  res.redirect(`https://gitlyhub.netlify.app/src/authpage/signup.html`); 
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/signup.html`); 
     
 });
 //redirect user to forgotpassword page
 signup.get("/forgotPassword", (req, res) => { 
-   res.redirect(`https://gitlyhub.netlify.app/src/authpage/forgotPassword.html`); 
+   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/forgotPassword.html`); 
      
 });
   
@@ -425,7 +425,7 @@ signup.get("/forgotPassword", (req, res) => {
 //redirect user to home oage if and only the user is authorized
 signup.get("/home",auth,async (req,res)=>{ 
  
-  res.redirect(`https://gitlyhub.netlify.app/src/homepage/home.html`); 
+  res.redirect(`https://nithyaganesh.netlify.app/src/homepage/home.html`); 
 });
      
  
