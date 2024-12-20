@@ -44,7 +44,8 @@ async function tempAuth(req,res,next) {
      if(!user){
       throw new Error("login with github or google")
      }
-     
+     console.log("yes");
+
      
 req.user=user; 
      next(); 
