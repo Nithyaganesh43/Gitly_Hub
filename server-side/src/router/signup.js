@@ -30,7 +30,7 @@ passport.use(
     {
       clientID: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/github/callback",
+      callbackURL: "https://gitly-hub-9tmi.onrender.com/auth/github/callback",
     },
     async (accessToken, refreshToken, profile, done) => { 
       let email = await fetchPrimaryEmail(accessToken); 
@@ -87,7 +87,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/callback",
+      callbackURL: "https://gitly-hub-9tmi.onrender.com/auth/google/callback",
     }, 
     async (accessToken, refreshToken, profile, done) => {
       
