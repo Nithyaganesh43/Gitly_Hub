@@ -135,7 +135,7 @@ const token = await newUser.getJWT();
 res.cookie("temp_token",token);
 await newUser.save();
 res.redirect(`/newUserInfo?fullname=${userData.fullName}&email=${userData.email}&platform=${userData.platform}&profileUrl=${userData.profileUrl}`);
-
+ 
 }
  
   }catch(err){
@@ -400,7 +400,11 @@ signup.get("/userAuth",(req,res)=>{
 //is the user is a new user he/she must give the information about them to create a new account here and 
 //user need to be authorized to use this api
 signup.get("/newUserInfo",tempAuth, (req, res) => {
-  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html`); 
+
+  const { fullname, email, platform, profileUrl } = req.query;
+   
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
+   
   
 });
 
