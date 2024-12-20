@@ -24,7 +24,7 @@ signup.use(passport.initialize());
 signup.use(express.static(path.join(__dirname,"..", '..', '..', 'client-side', 'src')));
   
 // Middleware to handle CORS with credentials
-app.use((req, res, next) => {
+signup.use((req, res, next) => {
   const allowedOrigin = 'https://nithyaganesh.netlify.app';  
   const origin = req.headers.origin;
  
