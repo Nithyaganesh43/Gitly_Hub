@@ -44,24 +44,34 @@
 </head>
 <body>
     <div class="container">
-        <h1 id="welcomeMessage">Welcome</h1>
+        <h1 id="welcomeMessage">Loading...</h1>
         <button onclick="clearAllTokens()">Log Out</button>
     </div>
     <script>
         async function fetchUserData() {
-            while (true) {
+            let attempts = 0;
+            const maxAttempts = 5;  
+            const retryDelay = 2000;  
+
+            while (attempts < maxAttempts) {
                 try {
-                    const response = await axios.get('https://ng-dmcz.onrender.com/getUserCount');
+                    const response = await axios.get('https://ng-dmcz.onrender.com/getUserCountAndName', { withCredentials: true });
                     const { count, name } = response.data;
+ 
                     const suffixes = ["th", "st", "nd", "rd"];
                     const v = count % 100;
                     const ordinalSuffix = suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0];
+ 
                     document.getElementById('welcomeMessage').textContent = `Welcome ${name}, you are my ${count}${ordinalSuffix} user.`;
-                    break;
-                } catch {
-                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return;  
+                } catch (error) {
+                    attempts++;
+                    console.warn(`Attempt ${attempts} failed. Retrying...`);
+                    await new Promise(resolve => setTimeout(resolve, retryDelay));  
                 }
             }
+ 
+            document.getElementById('welcomeMessage').textContent = "Unable to fetch user data. Please try again later.";
         }
 
         function clearAllTokens() {

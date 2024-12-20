@@ -424,6 +424,10 @@ signup.get(`/getUserCountAndName`,auth,async (req,res)=>{
   const count = users.length;
   res.send({count : count , name : req.user.fullName });
 });
+ //20-12-2024 loading ku ok
+signup.get(`/get `,auth,async (req,res)=>{ 
+  res.send("ok");
+});
  
 
 //api which is called by client for  authentication it just redirects the user to auth page
