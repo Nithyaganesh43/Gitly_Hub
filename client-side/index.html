@@ -48,6 +48,7 @@
     <div class="line"></div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
     const languages = [
       "வணக்கம் (Tamil)", "Welcome (English)", "स्वागत है (Hindi)", 
@@ -80,15 +81,16 @@
     }
 
     async function checkServer() {
+      const serverUrl = "https://gitly-hub-9tmi.onrender.com/get";
       while (true) {
         try {
-          const res = await get('https://gitly-hub-9tmi.onrender.com');
-          if (res.ok) {
-            window.location.href = 'https://gitly-hub-9tmi.onrender.com';
+          const res = await axios.get(serverUrl);
+          if (res.data === "ok") {
+            window.location.href = "https://gitly-hub-9tmi.onrender.com";
             break;
           }
         } catch (e) { 
-          await new Promise(resolve => setTimeout(resolve, 3000));
+          await new Promise(resolve => setTimeout(resolve, 3000));  
         }
       }
     }
