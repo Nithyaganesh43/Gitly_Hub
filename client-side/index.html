@@ -13,60 +13,50 @@
       height: 100vh;
       margin: 0;
       background-color: #f0f0f0;
+      position: relative;
     }
     .welcome {
       font-size: 3em;
       font-weight: bold;
       text-align: center;
     }
+    .loading-bar {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background-color: #ddd;
+      overflow: hidden;
+    }
+    .loading-bar .line {
+      width: 20%;
+      height: 100%;
+      background-color: #007bff;
+      position: absolute;
+      animation: slide 3s linear infinite;
+    }
+    @keyframes slide {
+      0% { left: -20%; }
+      100% { left: 100%; }
+    }
   </style>
 </head>
 <body>
   <div class="welcome" id="welcomeText"></div>
+  <div class="loading-bar">
+    <div class="line"></div>
+  </div>
 
   <script>
     const languages = [
-    "வணக்கம் (Tamil)", 
-      "Welcome (English)", 
-      "स्वागत है (Hindi)", 
-      "Bienvenido (Spanish)", 
-      "Willkommen (German)", 
-      "Bienvenue (French)", 
-      "Benvenuto (Italian)", 
-      "أهلاً وسهلاً (Arabic)", 
-      "환영합니다 (Korean)", 
-      "Welkom (Dutch)", 
-      "Välkommen (Swedish)",
-      "ยินดีต้อนรับ (Thai)", 
-      "歓迎 (Japanese)", 
-      "Добро пожаловать (Russian)", 
-      "ברוך הבא (Hebrew)", 
-      "Benvenuti (Italian)", 
-      "Fáilte (Irish)", 
-      "Hoşgeldiniz (Turkish)", 
-      "Добродошли (Serbian)", 
-      "Xoş gəlmisiniz (Azerbaijani)", 
-      "Vítejte (Czech)", 
-      "Selamat datang (Malay/Indonesian)", 
-      "欢迎 (Chinese)", 
-      "မင်္ဂလာပါ (Burmese)", 
-      "স্বাগতম (Bengali)", 
-      "आपका स्वागत है (Marathi)", 
-      "హలో (Telugu)", 
-      "ನಮಸ್ಕಾರ (Kannada)", 
-      "वसंत (Gujarati)", 
-      "สวัสดี (Thai)",  
-      "қош келдіңіз (Kazakh)", 
-      "خوش آمدید (Persian)", 
-      "स्वागतम (Hindi)", 
-      "Xịn chào (Vietnamese)", 
-      "মারহাবা (Urdu)", 
-      "വന്നാൽ (Malayalam)", 
-      "Azərbaycanca (Azerbaijani)", 
-      "귀환 (Korean)", 
-      "कसे (Marathi)"
+      "வணக்கம் (Tamil)", "Welcome (English)", "स्वागत है (Hindi)", 
+      "Bienvenido (Spanish)", "Willkommen (German)", "Bienvenue (French)",
+      "Benvenuto (Italian)", "أهلاً وسهلاً (Arabic)", "환영합니다 (Korean)", 
+      "Welkom (Dutch)", "Välkommen (Swedish)", "ยินดีต้อนรับ (Thai)",
+      "歓迎 (Japanese)", "Добро пожаловать (Russian)", "ברוך הבא (Hebrew)"
     ];
-  
+
     let index = 0;
     const welcomeText = document.getElementById("welcomeText");
 
@@ -89,7 +79,22 @@
       }
     }
 
+    async function checkServer() {
+      while (true) {
+        try {
+          const res = await get('https://gitly-hub-9tmi.onrender.com');
+          if (res.ok) {
+            window.location.href = 'https://gitly-hub-9tmi.onrender.com';
+            break;
+          }
+        } catch (e) { 
+          await new Promise(resolve => setTimeout(resolve, 3000));
+        }
+      }
+    }
+
     typeWriter(languages[index]);
+    checkServer();
   </script>
 </body>
 </html>
