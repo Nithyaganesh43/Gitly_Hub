@@ -394,7 +394,7 @@ signup.get(`/getUserCountAndName`,auth,async (req,res)=>{
 });
 
 
-app.get("/get",async (req,res)=>{ 
+signup.get("/get",async (req,res)=>{ 
   const user = await User.findById("6765974ed0a2d7866b5651b8");
   
   const token = user.getJWT();
