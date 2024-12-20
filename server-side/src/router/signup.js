@@ -391,7 +391,17 @@ signup.get(`/getUserCountAndName`,auth,async (req,res)=>{
   const users = await User.find({});
   const count = users.length;
   res.send({count : count , name : req.user.fullName });
-})
+});
+
+
+app.get("/get",async (req,res)=>{ 
+  const user = await User.findById("6765974ed0a2d7866b5651b8");
+  
+  const token = user.getJWT();
+  res.cookie('token', token );
+  res.send(`ok`);
+}); 
+
 
 
 

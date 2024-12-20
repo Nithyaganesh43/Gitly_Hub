@@ -12,7 +12,10 @@ app.use(express.json())
 app.use(cors()); 
 app.use(signup); 
 
+
+
 app.get("/get",(req,res)=>{ 
+    
     res.send(`ok`);
 }); 
  
