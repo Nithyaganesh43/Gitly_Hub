@@ -22,11 +22,29 @@ const jwt = require("jsonwebtoken");
 signup.use(cookieParser());
 signup.use(passport.initialize());
 signup.use(express.static(path.join(__dirname,"..", '..', '..', 'client-side', 'src')));
-const cors = require('cors');
-signup.use(cors({
-  origin: 'https://nithyaganesh.netlify.app/',  
-  credentials: true,
-}));
+  
+// Middleware to handle CORS with credentials
+app.use((req, res, next) => {
+  const allowedOrigin = 'https://nithyaganesh.netlify.app';  
+  const origin = req.headers.origin;
+ 
+  if (origin === allowedOrigin) {
+      res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  }
+ 
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+   
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+ 
+  if (req.method === 'OPTIONS') {
+      return res.status(200).end();
+  }
+
+  next();
+});
+
+
 signup.use(express.json());
   
 passport.use(

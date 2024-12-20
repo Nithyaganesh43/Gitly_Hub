@@ -57,17 +57,18 @@ window.onload = async function () {
 
         if (password === confirmPassword) {
             await axios
-                .post(`https://ng-dmcz.onrender.com/signupSuccessful`, { fullName, userName, password, email, platform },{
-                    withCredentials: true,
-                })
-                .then((response) => {
-                    alert(response.data.message);
-                    window.location.href = `https://ng-dmcz.onrender.com`;
-                })
-                .catch((error) => {
-                    console.log(error );
-                    alert(error.response.data.message); 
-                });
+            .post('https://ng-dmcz.onrender.com/signupSuccessful', { fullName, userName, password, email, platform }, {
+              withCredentials: true,
+            })
+            .then((response) => {
+              alert(response.data.message);
+              window.location.href = `https://ng-dmcz.onrender.com`;
+            })
+            .catch((error) => {
+              console.log(error);
+              alert(error.response.data.message);
+            });
+          
         } else {
             alert("Please make sure all fields are filled correctly.");
         }

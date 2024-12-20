@@ -3,16 +3,12 @@ require('dotenv').config();
 
 
 
-const app = express();
-const cors = require('cors');
+const app = express(); 
 const signup   = require("./router/signup");
 const connectToDB = require("./config/database");  
 const {auth }=require("./middlewares/loginAuth"); 
 app.use(express.json())
-app.use(cors({
-  origin: 'https://nithyaganesh.netlify.app/',  
-  credentials: true,
-}));
+ 
 app.use(signup); 
 
 
