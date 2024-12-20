@@ -224,17 +224,12 @@ signup.post("/auth/gitly",async (req,res)=>{
 //after the new user giving the information validation takes place then we are updating the user data
 //and re-writing the token for next one day
 
-signup.post("/signupSuccessful",  async (req, res) => {
+signup.post("/signupSuccessful",tempAuth,  async (req, res) => {
   
   try{ 
     const {fullName, userName , password  ,platform , email }= req.body;
-    await validateUserInfromations(fullName , userName , password,platform , email ); 
-    const tokenByUser = req.cookies?.temp_token;
-    if(!tokenByUser){
-      throw new Error("Token Not Found try again");
-    }
-  const userid = await jwt.verify(tokenByUser , process.env.SECRET);
-  const user = await User.findById( userid );
+    await validateUserInfromations(fullName , userName , password,platform , email );  
+  const user = req.user;
 
   if(user){
     if(user.fullName && user.passport && user.userName){
@@ -392,7 +387,7 @@ signup.post("/resetPassword", async (req, res) => {
 
 
 //20-12-2024 get number of users 
-app.get(`/getUserCountAndName`,auth,async (req,res)=>{
+signup.get(`/getUserCountAndName`,auth,async (req,res)=>{
   const users = await User.find({});
   const count = users.length;
   res.send({count : count , name : req.user.fullName });
@@ -409,10 +404,12 @@ signup.get("/userAuth",(req,res)=>{
 
 //is the user is a new user he/she must give the information about them to create a new account here and 
 //user need to be authorized to use this api
-signup.get("/newUserInfo",tempAuth, (req, res) => {
+signup.get("/newUserInfo",tempAuth,async (req, res) => {
 
   const { fullname, email, platform, profileUrl } = req.query;
-   
+
+  const token = await req.user.getJWT();
+  res.cookie("temp_token",token);
   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
    
   
