@@ -449,7 +449,10 @@ signup.get("/newUserInfo",tempAuth,async (req, res) => {
   const { fullname, email, platform, profileUrl } = req.query; 
   console.log(req.user);
   const jwt = req.user.getJWT();
-  res.cookie('temp_token',jwt);
+  res.cookie('temp_token',jwt,{ httpOnly: false,   
+    secure: false,sameSite: 'None'   });
+    console.log(req.user );
+    console.log(jwt );
   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
 });
 
