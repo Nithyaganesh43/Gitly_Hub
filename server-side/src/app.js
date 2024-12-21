@@ -10,15 +10,14 @@ const {auth }=require("./middlewares/loginAuth");
 app.use(express.json())
  
 const cors = require('cors');
- 
 const allowedOrigin = /^https:\/\/([a-z0-9-]+\.)?nithyaganesh\.netlify\.app$/;
 
 const corsOptions = {
   origin: (origin, callback) => {
     if (!origin || allowedOrigin.test(origin)) {
-      callback(null, true);   
+      callback(null, true);  
     } else {
-      callback(new Error('Not allowed by CORS'));  
+      callback(new Error('Not allowed by CORS'));   
     }
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -28,11 +27,11 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
  
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  next();
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.sendStatus(200);
 });
 
 app.use(signup); 
