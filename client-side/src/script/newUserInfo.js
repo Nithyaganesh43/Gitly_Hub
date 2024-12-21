@@ -61,11 +61,14 @@ localStorage.setItem('tt',tt);
         const confirmPassword = document.getElementById('confirm-password').value;
 
         if (password === confirmPassword) {
-            await axios
-            .post('https://ng-dmcz.onrender.com/signupSuccessful', { fullName, userName, password, email, platform,tt }, {
-              withCredentials: true,
-            })
-            .then((response) => {
+            
+              
+            await axios.post('https://ng-dmcz.onrender.com/signupSuccessful', { fullName, userName, password, email, platform,tt }, {
+              withCredentials: true
+            }).then((response) => {
+                
+                console.log(response);
+                console.log(response.data);
               alert(response.data.message); 
               window.location.href = `https://nithyaganesh.netlify.app/src/homePage/home.html`;
             })

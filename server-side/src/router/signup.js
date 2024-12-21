@@ -97,7 +97,7 @@ await newUser.save();
 res.redirect(`/newUserInfo?fullname=${userData.fullName}&email=${userData.email}&platform=${userData.platform}&profileUrl=${userData.profileUrl}`);
 
 } }catch(err){
-  res.redirect(`/userAuth?error=${err}`);
+  res.redirect(`/userAuth`);
 } }
 );
 
@@ -244,7 +244,7 @@ signup.post("/auth/gitly",async (req,res)=>{
 //after the new user giving the information validation takes place then we are updating the user data
 //and re-writing the token for next one day
 
-signup.post("/signupSuccessful",  async (req, res) => {
+signup.post("/signupSuccessful", tempAuth, async (req, res) => {
   
   try{     
     
@@ -450,10 +450,8 @@ if(err){
 //is the user is a new user he/she must give the information about them to create a new account here and 
 //user need to be authorized to use this api
 signup.get("/newUserInfo",tempAuth,async (req, res) => {
-  const { fullname, email, platform, profileUrl } = req.query;
-  const user = req.user;
-  const token = await user.getJWT();  
-  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}&tt=${token}`);
+  const { fullname, email, platform, profileUrl } = req.query; 
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
 });
 
 //redirect user to login page

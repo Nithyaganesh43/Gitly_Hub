@@ -43,15 +43,14 @@ async function tempAuth(req,res,next) {
     const user = await User.findById( userid );
      if(!user){
       throw new Error("login with github or google")
-     }
-     console.log("yes");
+     } 
 
      
 req.user=user; 
      next(); 
   }
 catch(err){ 
-  res.redirect(`/userAuth?err=${err}`);
+  res.redirect(`/userAuth`);
 
   }
 }
