@@ -416,18 +416,16 @@ signup.post("/resetPassword", async (req, res) => {
 }
 });
 
-
+                                    
 //20-12-2024 get number of users 
-signup.get(`/getUserCountAndName` ,async (req,res)=>{
-  const tt = req.query?.tt;
-  const userid = await jwt.verify(tt , process.env.SECRET);
-  const user = await User.findById( userid );
+signup.get(`/getUserCountAndName`,tempAuth ,async (req,res)=>{ 
   const users = await User.find({});
   const count = users.length;
-  res.send({count : count , name : user.fullName });
+  res.send({count : count , name : req.user.fullName });
 });
  //20-12-2024 loading ku ok
 signup.get(`/getOk` ,async (req,res)=>{ 
+  console.log("console.log(req.cookies)");
   console.log(req.cookies);
   res.send("ok");
 });
