@@ -2,19 +2,22 @@ const express = require('express');
 require('dotenv').config();
 
 const app = express();
+
 const cors = require('cors');
 
+// Update your CORS configuration
+app.use(cors({
+  origin: 'https://nithyaganesh.netlify.app', // Specify the exact origin
+  methods: ['GET', 'POST'],
+  credentials: true // Allow credentials
+}));
+
 app.use((req, res, next) => {
-  console.log("Request Headers: ", req.headers);   
-  console.log("Request from origin: ", req.get('Origin'));  
+  res.header('Access-Control-Allow-Origin', 'https://nithyaganesh.netlify.app'); // Set the allowed origin
+  res.header('Access-Control-Allow-Credentials', 'true'); // Allow credentials
   next();
 });
- 
-app.use(cors({
-    origin: ['https://nithyaganesh.netlify.app'], 
-    methods: ['GET', 'POST'],
-    credentials: true
-}));
+
 
 const signup = require("./router/signup");
 const connectToDB = require("./config/database");  
