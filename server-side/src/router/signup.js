@@ -427,6 +427,10 @@ signup.get(`/getUserCountAndName`,tempAuth ,async (req,res)=>{
 signup.get(`/getOk` ,async (req,res)=>{ 
   console.log("console.log(req.cookies)");
   console.log(req.cookies);
+  const token = req.cookies?.token;
+  const userid = await jwt.verify(token , process.env.SECRET);
+   const user = await User.findById( userid );
+   console.log(user);
   res.send("ok");
 });
  
