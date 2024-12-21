@@ -62,7 +62,10 @@ window.onload = async function () {
             
               
             await axios.post('https://ng-dmcz.onrender.com/signupSuccessful', { fullName, userName, password, email, platform  }, {
-              withCredentials: true
+              withCredentials: true,
+              headers: {
+                'Origin': 'https://nithyaganesh.netlify.app'
+              }
             }).then((response) => {
                 
                 console.log(response);
