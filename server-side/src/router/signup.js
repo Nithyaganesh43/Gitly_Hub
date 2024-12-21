@@ -23,22 +23,20 @@ signup.use(cookieParser());
 signup.use(passport.initialize());
 signup.use(express.static(path.join(__dirname,"..", '..', '..', 'client-side', 'src')));
   
-// Middleware to handle CORS with credentials
 signup.use((req, res, next) => {
-  const allowedOrigin = 'https://nithyaganesh.netlify.app';  
+  const allowedOrigin = /^https:\/\/.*\.onrender\.com$/;
   const origin = req.headers.origin;
- 
-  if (origin === allowedOrigin) {
-      res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+
+  if (allowedOrigin.test(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
   }
- 
+
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-   
   res.setHeader('Access-Control-Allow-Credentials', 'true');
- 
+
   if (req.method === 'OPTIONS') {
-      return res.status(200).end();
+      return res.status(200).send();
   }
 
   next();
@@ -430,7 +428,7 @@ signup.get(`/getUserCountAndName` ,async (req,res)=>{
   res.send({count : count , name : user.fullName });
 });
  //20-12-2024 loading ku ok
-signup.get(`/get `,auth,async (req,res)=>{ 
+signup.get(`/get ` ,async (req,res)=>{ 
   res.send("ok");
 });
  
