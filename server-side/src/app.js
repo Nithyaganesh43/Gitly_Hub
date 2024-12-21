@@ -10,7 +10,7 @@ app.use(cors({
   credentials: true  
 }));
  
-
+app.options('*', cors());
 
 const signup = require("./router/signup");
 const connectToDB = require("./config/database");  
