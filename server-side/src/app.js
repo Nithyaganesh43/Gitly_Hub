@@ -5,7 +5,6 @@ const app = express();
 const signup = require("./router/signup");
 const connectToDB = require("./config/database");  
 const { auth } = require("./middlewares/loginAuth"); 
-const cors = require('cors');
 
 app.use(express.json());
 

@@ -22,6 +22,7 @@ const jwt = require("jsonwebtoken");
 signup.use(cookieParser());
 signup.use(passport.initialize()); 
   
+  const cors = require('cors');
  
 const corsOptions = {
   origin: 'https://nithyaganesh.netlify.app',  
