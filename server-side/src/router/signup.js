@@ -246,7 +246,7 @@ signup.post("/auth/gitly",async (req,res)=>{
 //and re-writing the token for next one day
 
 signup.post("/signupSuccessful", tempAuth, async (req, res) => {
-  
+  console.log("tempAuth - > signup called success");
   try{     
     
     const {fullName, userName , password  ,platform , email}= req.body;
@@ -255,7 +255,7 @@ signup.post("/signupSuccessful", tempAuth, async (req, res) => {
       throw new Error("user  Not Found...");
     }  
 
-    await validateUserInfromations(fullName , userName , password , platform , email );  
+    // await validateUserInfromations(fullName , userName , password , platform , email );  
    
 
   if(user){
@@ -273,7 +273,9 @@ signup.post("/signupSuccessful", tempAuth, async (req, res) => {
     res.send({message:"successfully user registred"   });
    
 }
-
+else{
+  throw new Error("User not found ");
+}
 }catch(err){
   console.log(err);
   res.status(400).send({message : err.message});
