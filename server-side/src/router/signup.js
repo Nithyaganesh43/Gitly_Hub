@@ -20,9 +20,33 @@ const mail = require("../helper/mail");
 const validateUserInfromations = require("../helper/validateUserInfromations");
 const jwt = require("jsonwebtoken");
 signup.use(cookieParser());
-signup.use(passport.initialize());
-signup.use(express.static(path.join(__dirname,"..", '..', '..', 'client-side', 'src')));
+signup.use(passport.initialize()); 
   
+ 
+ const cors = require('cors');
+ const allowedOrigin = /^https:\/\/([a-z0-9-]+\.)?nithyaganesh\.netlify\.app$/;
+ 
+ const corsOptions = {
+   origin: (origin, callback) => {
+     if (!origin || allowedOrigin.test(origin)) {
+       callback(null, true);  
+     } else {
+       callback(new Error('Not allowed by CORS'));   
+     }
+   },
+   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+   allowedHeaders: ['Content-Type', 'Authorization'],
+   credentials: true,
+ };
+ 
+ signup.use(cors(corsOptions));
+  
+ signup.options('*', (req, res) => {
+   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+   res.header('Access-Control-Allow-Credentials', 'true');
+   res.sendStatus(200);
+ });
  
 
 

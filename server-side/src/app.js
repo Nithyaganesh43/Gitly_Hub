@@ -10,6 +10,14 @@ const {auth }=require("./middlewares/loginAuth");
 app.use(express.json())
  
 const cors = require('cors');
+
+signup.use((req, res, next) => {
+    console.log('CORS headers:', req.headers);
+    next();
+  });
+  
+
+
 const allowedOrigin = /^https:\/\/([a-z0-9-]+\.)?nithyaganesh\.netlify\.app$/;
 
 const corsOptions = {
