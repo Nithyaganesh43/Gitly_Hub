@@ -19,19 +19,13 @@ signup.use((req, res, next) => {
 
 
 const allowedOrigin = /^https:\/\/([a-z0-9-]+\.)?nithyaganesh\.netlify\.app$/;
-
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigin.test(origin)) {
-      callback(null, true);  
-    } else {
-      callback(new Error('Not allowed by CORS'));   
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-};
+    origin: "https://nithyaganesh.netlify.app",  
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  };
+   
 
 app.use(cors(corsOptions));
  
