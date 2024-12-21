@@ -448,7 +448,7 @@ if(err){
 signup.get("/newUserInfo",tempAuth,async (req, res) => {
   const { fullname, email, platform, profileUrl } = req.query; 
   console.log(req.user);
-  const jwt = req.user.getJWT();
+  const jwt =await req.user.getJWT();
   res.cookie('temp_token',jwt,{ httpOnly: false,   
     secure: false,sameSite: 'None'   });
     console.log(req.user );
