@@ -9,6 +9,33 @@ const connectToDB = require("./config/database");
 const {auth }=require("./middlewares/loginAuth"); 
 app.use(express.json())
  
+const cors = require('cors');
+ 
+
+const allowedOrigin = /^https:\/\/nithyaganesh\.netlify\.app$/;
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigin.test(origin)) {
+      callback(null, true);  
+    } else {
+      callback(new Error('Not allowed by CORS')); 
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  next();
+});
+
 app.use(signup); 
 
 

@@ -25,25 +25,6 @@ signup.use(express.static(path.join(__dirname,"..", '..', '..', 'client-side', '
   
  
 
-signup.use((req, res, next) => {
-  const allowedOrigin = /^https:\/\/.*\.onrender\.com$/;
-  const origin = req.headers.origin;
-
-  if (allowedOrigin.test(origin)) {
-      res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-
-  if (req.method === 'OPTIONS') {
-      return res.status(200).send();
-  }
-
-  next();
-});
-
 
 signup.use(express.json());
   
@@ -440,11 +421,11 @@ signup.get("/userAuth",(req,res)=>{
 const err = req.query?.err;
 if(err){
   
-  res.redirect(`https://gitly-hub-1.onrender.com/src/authpage/authindex.html?err=${err}`); 
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/authindex.html`); 
  
 }else{
   
-  res.redirect(`https://gitly-hub-1.onrender.com/src/authpage/authindex.html`); 
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/authindex.html`); 
  
 }
 })
@@ -453,23 +434,23 @@ if(err){
 //user need to be authorized to use this api
 signup.get("/newUserInfo",tempAuth,async (req, res) => {
   const { fullname, email, platform, profileUrl } = req.query; 
-  res.redirect(`https://gitly-hub-1.onrender.com/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
 });
 
 //redirect user to login page
 signup.get("/login", (req, res) => {
-  res.redirect(`https://gitly-hub-1.onrender.com/src/authpage/login.html`); 
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/login.html`); 
    
 });
 
 //redirect user to signup page
 signup.get("/signup", (req, res) => {
-  res.redirect(`https://gitly-hub-1.onrender.com/src/authpage/signup.html`); 
+  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/signup.html`); 
     
 });
 //redirect user to forgotpassword page
 signup.get("/forgotPassword", (req, res) => { 
-   res.redirect(`https://gitly-hub-1.onrender.com/src/authpage/forgotPassword.html`); 
+   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/forgotPassword.html`); 
      
 });
   
@@ -477,7 +458,7 @@ signup.get("/forgotPassword", (req, res) => {
 //redirect user to home oage if and only the user is authorized
 signup.get("/home",auth,async (req,res)=>{ 
  
-  res.redirect(`https://gitly-hub-1.onrender.com/src/homepage/home.html`); 
+  res.redirect(`https://nithyaganesh.netlify.app/src/homepage/home.html`); 
 });
      
  
