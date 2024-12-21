@@ -4,28 +4,19 @@ require('dotenv').config();
 const app = express();
 
 const cors = require('cors');
+ 
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://nithyaganesh.netlify.app');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  console.log(`[${new Date().toISOString()}] Method: ${req.method}, URL: ${req.originalUrl}, Headers: ${JSON.stringify(req.headers)}, Body: ${JSON.stringify(req.body)}, Query: ${JSON.stringify(req.query)}, IP: ${req.ip}`);
   next();
 });
 
-
-
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] CORS Check: ${req.method} ${req.originalUrl}`);
-  next();
-});
-
-app.use(cors({
+const corsOptions = {
   origin: 'https://nithyaganesh.netlify.app',
-  credentials: true
-}));
+  credentials: true,  
+};
 
-app.options('*', cors());  
+app.use(cors(corsOptions));
 
 const signup = require("./router/signup");
 const connectToDB = require("./config/database");  
@@ -39,9 +30,6 @@ app.get("/get", (req, res) => {
   res.send('ok');
 });
 app.get("/", auth, (req, res) => {
-  console.log(`[${new Date().toISOString()}] Authenticated user: Redirecting to /home`);
-  res.setHeader('Access-Control-Allow-Origin', 'https://nithyaganesh.netlify.app');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.redirect('/home');
 });
 

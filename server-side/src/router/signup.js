@@ -224,7 +224,7 @@ signup.post("/auth/gitly",async (req,res)=>{
 
 //after the new user giving the information validation takes place then we are updating the user data
 //and re-writing the token for next one day
-signup.post("/signupSuccessful", (req, res) => {
+signup.post("/signupSuccessful", tempAuth,(req, res) => {
   console.log(`Headers: ${JSON.stringify(req.headers)}`);
   console.log(`Body: ${JSON.stringify(req.body)}`);
   res.status(200).json({ message: 'Signup successful!' });
