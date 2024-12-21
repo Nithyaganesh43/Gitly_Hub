@@ -61,23 +61,23 @@ window.onload = async function () {
         if (password === confirmPassword) {
             
               
-            await axios.post('https://ng-dmcz.onrender.com/signupSuccessful', { fullName, userName, password, email, platform  }, {
-              withCredentials: true,
-              headers: {
-                'Origin': 'https://nithyaganesh.netlify.app'
-              }
-            }).then((response) => {
-                
-                console.log(response);
-                console.log(response.data);
-              alert(response.data.message); 
-              window.location.href = `https://nithyaganesh.netlify.app/src/homePage/home.html`;
-            })
-            .catch((error) => {
-              console.log(error);
-              alert(error.response.data.message);
-            });
-          
+            await axios.post(
+                'https://ng-dmcz.onrender.com/signupSuccessful',
+                { fullName, userName, password, email, platform },
+                {
+                  withCredentials: true
+                }
+              )
+                .then((response) => {
+                  console.log(response);
+                  alert(response.data.message);
+                  window.location.href = 'https://nithyaganesh.netlify.app/src/homePage/home.html';
+                })
+                .catch((error) => {
+                  console.log(error);
+                  alert(error.response?.data?.message || 'An error occurred');
+                });
+              
         } else {
             alert("Please make sure all fields are filled correctly.");
         }

@@ -5,18 +5,11 @@ const app = express();
 
 const cors = require('cors');
 
-// Update your CORS configuration
 app.use(cors({
-  origin: 'https://nithyaganesh.netlify.app', // Specify the exact origin
-  methods: ['GET', 'POST'],
-  credentials: true // Allow credentials
+  origin: 'https://nithyaganesh.netlify.app',  
+  credentials: true  
 }));
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://nithyaganesh.netlify.app'); // Set the allowed origin
-  res.header('Access-Control-Allow-Credentials', 'true'); // Allow credentials
-  next();
-});
+ 
 
 
 const signup = require("./router/signup");
