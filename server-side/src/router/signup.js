@@ -224,43 +224,48 @@ signup.post("/auth/gitly",async (req,res)=>{
 
 //after the new user giving the information validation takes place then we are updating the user data
 //and re-writing the token for next one day
+signup.post("/signupSuccessful", (req, res) => {
+  console.log(`Headers: ${JSON.stringify(req.headers)}`);
+  console.log(`Body: ${JSON.stringify(req.body)}`);
+  res.status(200).json({ message: 'Signup successful!' });
+});
 
-signup.post("/signupSuccessful", tempAuth, async (req, res) => {
-  console.log("tempAuth - > signup called success");
-  try{     
+// signup.post("/signupSuccessful", tempAuth, async (req, res) => {
+//   console.log("tempAuth - > signup called success");
+//   try{     
     
-    const {fullName, userName , password  ,platform , email}= req.body;
- const user = req.user;
- console.log(user);
-    if(!user){
-      throw new Error("user  Not Found...");
-    }  
+//     const {fullName, userName , password  ,platform , email}= req.body;
+//  const user = req.user;
+//  console.log(user);
+//     if(!user){
+//       throw new Error("user  Not Found...");
+//     }  
 
-    await validateUserInfromations(fullName , userName , password , platform , email );  
+//     await validateUserInfromations(fullName , userName , password , platform , email );  
    
 
-  if(user){
-    if(user.fullName && user.passport && user.userName){
-      throw new Error("Already registed the informations");
-    }
-    const updatedStatus = await User.findByIdAndUpdate(user._id,{fullName:fullName, userName:userName , password:password});
-    if (!updatedStatus) {
-      throw new Error("User not found or update failed.");
-  }
+//   if(user){
+//     if(user.fullName && user.passport && user.userName){
+//       throw new Error("Already registed the informations");
+//     }
+//     const updatedStatus = await User.findByIdAndUpdate(user._id,{fullName:fullName, userName:userName , password:password});
+//     if (!updatedStatus) {
+//       throw new Error("User not found or update failed.");
+//   }
 
     
-    let token = await user.getJWT();
-    res.cookie("token",token);
-    res.send({message:"successfully user registred"   });
+//     let token = await user.getJWT();
+//     res.cookie("token",token);
+//     res.send({message:"successfully user registred"   });
    
-}
-else{
-  throw new Error("User not found ");
-}
-}catch(err){
-  console.log(err);
-  res.status(400).send({message : err.message});
-}}); 
+// }
+// else{
+//   throw new Error("User not found ");
+// }
+// }catch(err){
+//   console.log(err);
+//   res.status(400).send({message : err.message});
+// }}); 
 
 //this api works for login is the user gives correct username and password it gives jwt else it say 404
 signup.post("/userLogedIn", async (req, res) => { 
@@ -419,16 +424,9 @@ signup.get(`/getOk` ,async (req,res)=>{
 signup.get("/userAuth",(req,res)=>{
   res.setHeader('Access-Control-Allow-Origin', 'https://nithyaganesh.netlify.app');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-const err = req.query?.err;
-if(err){
-  
-  res.redirect(`https://nithyaganesh.netlify.app/src/authpage/authindex.html`); 
  
-}else{
-  
   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/authindex.html`); 
- 
-}
+  
 })
 
 //is the user is a new user he/she must give the information about them to create a new account here and 
