@@ -34,7 +34,7 @@ catch(err){
 async function tempAuth(req, res, next) {
   try {
     const tokenByUser = req.cookies?.temp_token; 
-    console.log("Token: ", tokenByUser);
+    console.log("Token: ", req.cookies);
     if (!tokenByUser) {
       throw new Error("Token Not Found");
     }

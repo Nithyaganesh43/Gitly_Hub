@@ -5,11 +5,7 @@ const app = express();
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
-
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] Method: ${req.method}, URL: ${req.originalUrl}, Headers: ${JSON.stringify(req.headers)}, Body: ${JSON.stringify(req.body)}, Query: ${JSON.stringify(req.query)}, IP: ${req.ip}`);
-  next();
-});
+ 
 
 const cors = require('cors');
 
@@ -22,16 +18,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));  
 app.use(express.json());  
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] Method: ${req.method}, URL: ${req.originalUrl}, Headers: ${JSON.stringify(req.headers)}, Body: ${JSON.stringify(req.body)}, Query: ${JSON.stringify(req.query)}, IP: ${req.ip}`);
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log(`[DEBUG] Incoming Headers: ${JSON.stringify(req.headers)}`);
-  next();
-});
-
+ 
 const signup = require("./router/signup");
 const connectToDB = require("./config/database");  
 const { auth } = require("./middlewares/loginAuth"); 
