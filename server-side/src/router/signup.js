@@ -447,6 +447,9 @@ if(err){
 //user need to be authorized to use this api
 signup.get("/newUserInfo",tempAuth,async (req, res) => {
   const { fullname, email, platform, profileUrl } = req.query; 
+  console.log(req.user);
+  const jwt = req.user.getJWT();
+  res.cookie('temp_token',jwt);
   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
 });
 
