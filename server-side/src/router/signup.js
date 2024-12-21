@@ -9,11 +9,20 @@ const cookieParser = require("cookie-parser");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const signup = express.Router();   
 const cors = require('cors');
+
+// Middleware to log the incoming origin
+signup.use((req, res, next) => {
+    console.log(`Request from origin: ${req.get('Origin')}`);
+    next();
+});
+
+// CORS configuration
 signup.use(cors({
-    origin: 'https://nithyaganesh.netlify.app',
+    origin: '*',  // This allows all domains
     methods: ['GET', 'POST'],
     credentials: true
-})); 
+}));
+
 const fetchPrimaryEmail = require("../helper/fetchPrimaryEmailForGitHub");
 const {auth , tempAuth }= require("../middlewares/loginAuth");
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;

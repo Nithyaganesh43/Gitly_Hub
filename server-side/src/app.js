@@ -3,11 +3,20 @@ require('dotenv').config();
 
 const app = express();
 const cors = require('cors');
+
+// Middleware to log the incoming origin
+app.use((req, res, next) => {
+    console.log(`Request from origin: ${req.get('Origin')}`);
+    next();
+});
+
+// CORS configuration
 app.use(cors({
-    origin: 'https://nithyaganesh.netlify.app',
+    origin: '*',  // This allows all domains
     methods: ['GET', 'POST'],
     credentials: true
-})); 
+}));
+
 const signup = require("./router/signup");
 const connectToDB = require("./config/database");  
 const { auth } = require("./middlewares/loginAuth"); 
