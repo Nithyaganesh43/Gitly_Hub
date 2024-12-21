@@ -24,19 +24,14 @@ signup.use(passport.initialize());
   
   const cors = require('cors');
  
-const corsOptions = {
-  origin: 'https://nithyaganesh.netlify.app',  
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,  };
+  const corsOptions = {
+    origin: /^https:\/\/([a-z0-9-]+\.)?nithyaganesh\.netlify\.app$/,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  };
+  
  
-
-signup.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.sendStatus(200);
-});
  
  signup.use(cors(corsOptions));
   
