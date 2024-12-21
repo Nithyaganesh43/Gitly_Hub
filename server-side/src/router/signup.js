@@ -427,7 +427,7 @@ signup.get(`/getUserCountAndName` ,async (req,res)=>{
   res.send({count : count , name : user.fullName });
 });
  //20-12-2024 loading ku ok
-signup.get(`/get ` ,async (req,res)=>{ 
+signup.get(`/getOk` ,async (req,res)=>{ 
   console.log(req.cookies);
   res.send("ok");
 });
