@@ -4,7 +4,10 @@ require('dotenv').config();
 const app = express();
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+app.use((req,res)=>{
+  console.log("Cookies: ", req.cookies);
 
+})
  
 
 const cors = require('cors');
