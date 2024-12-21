@@ -3,10 +3,8 @@ window.onload = async function () {
 
     const platform = urlParams.get('platform');
     const email = urlParams.get('email');
-    const fullname = urlParams.get('fullname');
-    const tt = urlParams.get('tt');
- 
-localStorage.setItem('tt',tt);
+    const fullname = urlParams.get('fullname'); 
+  
  
 
 
@@ -63,7 +61,7 @@ localStorage.setItem('tt',tt);
         if (password === confirmPassword) {
             
               
-            await axios.post('https://ng-dmcz.onrender.com/signupSuccessful', { fullName, userName, password, email, platform,tt }, {
+            await axios.post('https://ng-dmcz.onrender.com/signupSuccessful', { fullName, userName, password, email, platform  }, {
               withCredentials: true
             }).then((response) => {
                 

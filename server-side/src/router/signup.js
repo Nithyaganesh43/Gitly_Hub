@@ -23,21 +23,19 @@ signup.use(cookieParser());
 signup.use(passport.initialize()); 
   
  
- const cors = require('cors');
- const allowedOrigin = /^https:\/\/([a-z0-9-]+\.)?nithyaganesh\.netlify\.app$/;
+const corsOptions = {
+  origin: 'https://nithyaganesh.netlify.app',  
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,  };
  
- const corsOptions = {
-   origin: (origin, callback) => {
-     if (!origin || allowedOrigin.test(origin)) {
-       callback(null, true);  
-     } else {
-       callback(new Error('Not allowed by CORS'));   
-     }
-   },
-   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-   allowedHeaders: ['Content-Type', 'Authorization'],
-   credentials: true,
- };
+
+signup.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.sendStatus(200);
+});
  
  signup.use(cors(corsOptions));
   
@@ -255,16 +253,11 @@ signup.post("/signupSuccessful", tempAuth, async (req, res) => {
   
   try{     
     
-    const {fullName, userName , password  ,platform , email ,token}= req.body;
- 
-    if(!token){
-      throw new Error("Token Not Found...");
-    }
-   const userid = await jwt.verify(token , process.env.SECRET);
-    const user = await User.findById( userid );
-     if(!user){
-      throw new Error("login with github or google")
-     }  
+    const {fullName, userName , password  ,platform , email}= req.body;
+ const user = req.user;
+    if(!user){
+      throw new Error("user  Not Found...");
+    }  
 
     await validateUserInfromations(fullName , userName , password , platform , email );  
    
