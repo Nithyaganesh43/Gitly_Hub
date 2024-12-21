@@ -65,13 +65,21 @@ signup.get(
 if(user){
  
 const token = await user.getJWT();
-res.cookie("token",token);
+res.cookie("token",token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', 
+  sameSite: 'Strict',
+});
 
 res.redirect(`/home`); 
 }else{ 
 const newUser = new User(userData);
 const token = await newUser.getJWT();
-res.cookie("temp_token",token);
+res.cookie("temp_token",token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', 
+  sameSite: 'Strict',
+});
 await newUser.save();
 res.redirect(`/newUserInfo?fullname=${userData.fullName}&email=${userData.email}&platform=${userData.platform}&profileUrl=${userData.profileUrl}`);
 
@@ -125,13 +133,21 @@ signup.get(
 if(user){
    
 const token = await user.getJWT();
-res.cookie("token",token);
+res.cookie("token",token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', 
+  sameSite: 'Strict',
+});
 
 res.redirect(`/home`); 
 }else{ 
 const newUser = new User(userData);
 const token = await newUser.getJWT();
-res.cookie("temp_token",token);
+res.cookie("temp_token",token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', 
+  sameSite: 'Strict',
+});
 await newUser.save();
 res.redirect(`/newUserInfo?fullname=${userData.fullName}&email=${userData.email}&platform=${userData.platform}&profileUrl=${userData.profileUrl}`);
  
@@ -173,7 +189,11 @@ const userData = {
  
   const newUser = new User(userData);
    token = await newUser.getJWT();
-  res.cookie("temp_token",token);
+  res.cookie("temp_token",token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', 
+    sameSite: 'Strict',
+  });
   await newUser.save(); 
   res.send({status : " success" , message : "SignUp successfull"});
   }catch(err){
@@ -211,7 +231,11 @@ signup.post("/auth/gitly",async (req,res)=>{
   await mail( otp,email);
   let jwtOTP = await jwt.sign({ jwtOTP: otp , email: email }, process.env.SECRET, { expiresIn: '10m' }); 
  
-    res.cookie('token', jwtOTP, { httpOnly: true });
+    res.cookie('token', jwtOTP, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', 
+      sameSite: 'Strict',
+    });
     res.send({  message : "otp send" });
  
   }catch(err){
@@ -253,7 +277,11 @@ signup.post("/signupSuccessful", tempAuth,(req, res) => {
 
     
 //     let token = await user.getJWT();
-//     res.cookie("token",token);
+//     res.cookie("token",token, {
+//   httpOnly: true,
+//   secure: process.env.NODE_ENV === 'production', 
+//   sameSite: 'Strict',
+// });
 //     res.send({message:"successfully user registred"   });
    
 // }
@@ -278,7 +306,11 @@ signup.post("/userLogedIn", async (req, res) => {
   const user = await User.findOne( {userName:userName,password:password} );
   if(user){
     let token = await user.getJWT();
-    res.cookie("token",token); 
+    res.cookie("token",token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', 
+      sameSite: 'Strict',
+    }); 
     res.send({message:"successfully user registred"});
   }else{
      
@@ -318,7 +350,11 @@ signup.post("/forgotPasswordVerifyOtp",async (req,res)=>
       throw new Error("User Not found");
     }
      token = await user.getJWT();
-    res.cookie("token",token);  
+    res.cookie("token",token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', 
+      sameSite: 'Strict',
+    });  
     res.send({status : " success" , message : "SignUp successfull"});
     }catch(err){
       res.status(400).send({ status: "failed", message: err.message });
@@ -353,7 +389,11 @@ signup.post("/forgotPasswordGetOtp",async (req,res)=>{
     await mail( otp,email);
     let jwtOTP = await jwt.sign({ jwtOTP: otp , email: email }, process.env.SECRET, { expiresIn: '10m' }); 
    
-      res.cookie('token', jwtOTP, { httpOnly: true });
+      res.cookie('token', jwtOTP, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', 
+        sameSite: 'Strict',
+      });
       res.send({  message : "otp send" });
    
     }
@@ -407,13 +447,7 @@ signup.get(`/getUserCountAndName`,tempAuth ,async (req,res)=>{
   res.send({count : count , name : req.user.fullName });
 });
  //20-12-2024 loading ku ok
-signup.get(`/getOk` ,async (req,res)=>{ 
-  console.log("console.log(req.cookies)");
-  console.log(req.cookies);
-  const token = req.cookies?.token;
-  const userid = await jwt.verify(token , process.env.SECRET);
-   const user = await User.findById( userid );
-   console.log(user);
+signup.get(`/getOk` ,async (req,res)=>{   
   res.send("ok");
 });
  
@@ -432,8 +466,11 @@ signup.get("/userAuth",(req,res)=>{
 signup.get("/newUserInfo",tempAuth,async (req, res) => {
   const { fullname, email, platform, profileUrl } = req.query;  
   const jwt =await req.user.getJWT();
-  res.cookie('temp_token',jwt,{ httpOnly: false,   
-    secure: false,sameSite: 'None'   }); 
+  res.cookie('temp_token',jwt, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', 
+    sameSite: 'Strict',
+  }); 
   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
 });
 
