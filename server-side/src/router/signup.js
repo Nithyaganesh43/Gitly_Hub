@@ -428,6 +428,7 @@ signup.get(`/getUserCountAndName` ,async (req,res)=>{
 });
  //20-12-2024 loading ku ok
 signup.get(`/get ` ,async (req,res)=>{ 
+  console.log(req.cookies);
   res.send("ok");
 });
  
@@ -449,13 +450,10 @@ if(err){
 //is the user is a new user he/she must give the information about them to create a new account here and 
 //user need to be authorized to use this api
 signup.get("/newUserInfo",tempAuth,async (req, res) => {
-  const { fullname, email, platform, profileUrl } = req.query; 
-  console.log(req.user);
+  const { fullname, email, platform, profileUrl } = req.query;  
   const jwt =await req.user.getJWT();
   res.cookie('temp_token',jwt,{ httpOnly: false,   
-    secure: false,sameSite: 'None'   });
-    console.log(req.user );
-    console.log(jwt );
+    secure: false,sameSite: 'None'   }); 
   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
 });
 
