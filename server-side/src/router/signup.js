@@ -3,12 +3,17 @@
 const express = require("express");
 const passport = require("passport"); 
 require('dotenv').config();
-const GitHubStrategy = require("passport-github2").Strategy;
-const path = require("path"); 
+const GitHubStrategy = require("passport-github2").Strategy; 
 const User = require("../models/user"); 
 const cookieParser = require("cookie-parser");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const signup = express.Router();   
+const cors = require('cors');
+signup.use(cors({
+    origin: 'https://nithyaganesh.netlify.app',
+    methods: ['GET', 'POST'],
+    credentials: true
+})); 
 const fetchPrimaryEmail = require("../helper/fetchPrimaryEmailForGitHub");
 const {auth , tempAuth }= require("../middlewares/loginAuth");
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
@@ -21,29 +26,8 @@ const validateUserInfromations = require("../helper/validateUserInfromations");
 const jwt = require("jsonwebtoken");
 signup.use(cookieParser());
 signup.use(passport.initialize()); 
+   
   
-  const cors = require('cors');
- 
-  const corsOptions = {
-    origin: /^https:\/\/([a-z0-9-]+\.)?nithyaganesh\.netlify\.app$/,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-  };
-  
- 
- 
- signup.use(cors(corsOptions));
-  
- signup.options('*', (req, res) => {
-   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-   res.header('Access-Control-Allow-Credentials', 'true');
-   res.sendStatus(200);
- });
- 
-
-
 signup.use(express.json());
   
 passport.use(
@@ -256,7 +240,7 @@ signup.post("/signupSuccessful", tempAuth, async (req, res) => {
       throw new Error("user  Not Found...");
     }  
 
-    // await validateUserInfromations(fullName , userName , password , platform , email );  
+    await validateUserInfromations(fullName , userName , password , platform , email );  
    
 
   if(user){
