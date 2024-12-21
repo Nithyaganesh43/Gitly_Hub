@@ -251,6 +251,7 @@ signup.post("/signupSuccessful", tempAuth, async (req, res) => {
     
     const {fullName, userName , password  ,platform , email}= req.body;
  const user = req.user;
+ console.log(user);
     if(!user){
       throw new Error("user  Not Found...");
     }  
