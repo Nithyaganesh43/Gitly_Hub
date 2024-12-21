@@ -65,10 +65,12 @@ window.onload = async function () {
                 'https://ng-dmcz.onrender.com/signupSuccessful',
                 { fullName, userName, password, email, platform },
                 {
-                  withCredentials: true
+                  withCredentials: true,
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
                 }
-              )
-                .then((response) => {
+              ).then((response) => {
                   console.log(response);
                   alert(response.data.message);
                   window.location.href = 'https://nithyaganesh.netlify.app/src/homePage/home.html';

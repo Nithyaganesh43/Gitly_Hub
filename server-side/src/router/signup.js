@@ -4,8 +4,7 @@ const express = require("express");
 const passport = require("passport"); 
 require('dotenv').config();
 const GitHubStrategy = require("passport-github2").Strategy; 
-const User = require("../models/user"); 
-const cookieParser = require("cookie-parser");
+const User = require("../models/user");  
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const signup = express.Router();   
  
@@ -19,8 +18,7 @@ const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 const validator = require("validator");
 const mail = require("../helper/mail");
 const validateUserInfromations = require("../helper/validateUserInfromations");
-const jwt = require("jsonwebtoken");
-signup.use(cookieParser());
+const jwt = require("jsonwebtoken"); 
 signup.use(passport.initialize()); 
    
   

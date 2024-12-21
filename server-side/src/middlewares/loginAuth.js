@@ -31,27 +31,26 @@ catch(err){
     }
 }
 
-
-
-async function tempAuth(req,res,next) {  
-  try{
+async function tempAuth(req, res, next) {
+  try {
     const tokenByUser = req.cookies?.temp_token;
-    if(!tokenByUser){
+    if (!tokenByUser) {
       throw new Error("Token Not Found");
     }
-   const userid = await jwt.verify(tokenByUser , process.env.SECRET);
-    const user = await User.findById( userid );
-     if(!user){
-      throw new Error("login with github or google")
-     } 
 
-     console.log("tempAuth success");
-req.user=user; 
-     next(); 
-  }
-catch(err){ 
-  res.redirect(`/userAuth`);
+    const userid = await jwt.verify(tokenByUser, process.env.SECRET);
+    const user = await User.findById(userid);
+    if (!user) {
+      throw new Error("Login with GitHub or Google");
+    }
 
+    console.log("tempAuth success");
+    req.user = user; 
+    next(); 
+  } catch (err) {
+    console.log(err.message); 
+    return res.redirect(`/userAuth`);
   }
 }
+
 module.exports={ auth , tempAuth };

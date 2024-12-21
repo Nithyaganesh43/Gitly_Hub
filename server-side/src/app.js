@@ -2,7 +2,10 @@ const express = require('express');
 require('dotenv').config();
 
 const app = express();
- 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] Method: ${req.method}, URL: ${req.originalUrl}, Headers: ${JSON.stringify(req.headers)}, Body: ${JSON.stringify(req.body)}, Query: ${JSON.stringify(req.query)}, IP: ${req.ip}`);
   next();
