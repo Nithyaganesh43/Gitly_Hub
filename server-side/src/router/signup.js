@@ -417,6 +417,8 @@ signup.get(`/getOk` ,async (req,res)=>{
 
 //api which is called by client for  authentication it just redirects the user to auth page
 signup.get("/userAuth",(req,res)=>{
+  res.setHeader('Access-Control-Allow-Origin', 'https://nithyaganesh.netlify.app');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
 const err = req.query?.err;
 if(err){
   
