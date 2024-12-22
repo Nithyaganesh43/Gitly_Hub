@@ -46,7 +46,7 @@ async function getOTP() {
             alert(response.data.message);
             operation = "submit";
             document.getElementById("box").innerHTML = `
-                <h2>Otp sended to ${email}</h2>
+                <h2>Otp sended to ${email} kindly check your inbox or spam</h2>
                 <input type="text" id="otp" placeholder="Enter Your 6-digit OTP" required>
                 <button type="button" onclick="submitOTP()" id="butt">Submit OTP</button>
             `;
