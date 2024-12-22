@@ -75,13 +75,17 @@
         }
 
         function clearAllTokens() {
-            const cookies = document.cookie.split(";");
+            const cookies = document.cookie.split("; ");
             for (const cookie of cookies) {
-                const name = cookie.split("=")[0].trim();
-                document.cookie = `${name}=;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                const name = cookie.split("=")[0];
+                if (name === "token") {
+                    document.cookie = `${name}=;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                    document.cookie = `${name}=;path=/;domain=${window.location.hostname};expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                }
             }
             window.location.href = "https://nithyaganesh.netlify.app/";
         }
+        
 
         fetchUserData();
     </script>
