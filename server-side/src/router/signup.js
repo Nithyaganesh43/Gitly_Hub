@@ -246,9 +246,9 @@ signup.post("/auth/gitly",async (req,res)=>{
   let jwtOTP = await jwt.sign({ jwtOTP: otp , email: email }, process.env.SECRET, { expiresIn: '10m' }); 
  
     res.cookie('token', jwtOTP, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', 
-      sameSite: 'Strict',
+      httpOnly: true, 
+      secure: true, 
+      sameSite: 'None' 
     });
     res.send({  message : "otp send" });
  
@@ -404,9 +404,9 @@ signup.post("/forgotPasswordGetOtp",async (req,res)=>{
     let jwtOTP = await jwt.sign({ jwtOTP: otp , email: email }, process.env.SECRET, { expiresIn: '10m' }); 
    
       res.cookie('token', jwtOTP, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', 
-        sameSite: 'Strict',
+        httpOnly: true, 
+        secure: true, 
+        sameSite: 'None' 
       });
       res.send({  message : "otp send" });
    
@@ -482,9 +482,9 @@ signup.get("/newUserInfo",tempAuth,async (req, res) => {
   const jwt =await req.user.getJWT();
   console.log("token send"); 
 res.cookie('token',jwt, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', 
-    sameSite: 'Strict',
+  httpOnly: true, 
+  secure: true, 
+  sameSite: 'None' 
   }); 
   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
 });
