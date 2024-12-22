@@ -455,11 +455,16 @@ signup.post("/resetPassword", async (req, res) => {
 
                                     
 //20-12-2024 get number of users 
-signup.get(`/getUserCountAndName`,tempAuth ,async (req,res)=>{ 
+signup.get(`/getUserCountAndName`, tempAuth, async (req, res) => { 
   const users = await User.find({});
+  const thisUser = req.user;
   const count = users.length;
-  res.send({count : count , name : req.user.fullName });
+  
+  const userIndex = users.findIndex(user => user._id.toString() === thisUser._id.toString());
+  
+  res.send({ count: userIndex+1, name: thisUser.fullName  });
 });
+
  //20-12-2024 loading ku ok
 signup.get(`/getOk` ,async (req,res)=>{   
   res.send("ok");
