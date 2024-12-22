@@ -35,7 +35,13 @@ function butt(opt) {
 async function getOTP() {
     window.localStorage.setItem("email", email);
     email = document.getElementById("email").value;
-    await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordGetOtp`, { email })
+    await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordGetOtp`, { email },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
         .then(response => {
             alert(response.data.message);
             operation = "submit";
@@ -60,7 +66,13 @@ async function submitOTP() {
         return;
     }
     email = window.localStorage.getItem("email");
-    await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordVerifyOtp`, { otp, email })
+    await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordVerifyOtp`, { otp, email },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
         .then(response => {
             alert(response.data.message);
             operation = "reset";
@@ -96,7 +108,13 @@ async function resetPassword() {
         alert("Passwords do not match.");
         return;
     }
-    await axios.post(`https://ng-dmcz.onrender.com/resetPassword`, { password: newPassword })
+    await axios.post(`https://ng-dmcz.onrender.com/resetPassword`, { password: newPassword },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
         .then(response => {
             alert(response.data.message);
             window.location.href = `https://ng-dmcz.onrender.com/`;

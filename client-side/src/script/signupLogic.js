@@ -26,7 +26,13 @@ async function getOTP() {
     otpButton.innerText = "Requesting...";
 
     try {
-        const response = await axios.post(`https://ng-dmcz.onrender.com/auth/gitly`, { email });
+        const response = await axios.post(`https://ng-dmcz.onrender.com/auth/gitly`, { email },
+            {
+              withCredentials: true,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
         alert(response.data.message);
 
         document.getElementById("signupBOX").innerHTML = `
@@ -57,7 +63,13 @@ function submitOTP() {
         return;
     }
 
-    axios.post(`https://ng-dmcz.onrender.com/auth/gitly/verifyotp`, { otp })
+    axios.post(`https://ng-dmcz.onrender.com/auth/gitly/verifyotp`, { otp },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
         .then((response) => {
             alert(response.data.message);
             window.location.href = `https://ng-dmcz.onrender.com/newUserInfo?email=${email}&platform=gitly`;

@@ -6,7 +6,13 @@ async function login() {
             alert("Username and password must be at least 8 characters");
             return;
         }
-        await axios.post(`https://ng-dmcz.onrender.com/userLogedIn`, { userName, password })
+        await axios.post(`https://ng-dmcz.onrender.com/userLogedIn`, { userName, password },
+            {
+              withCredentials: true,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
             .then(() => {
                 location.href = `https://ng-dmcz.onrender.com/`;
             })
