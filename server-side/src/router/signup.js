@@ -260,52 +260,52 @@ signup.post("/auth/gitly",async (req,res)=>{
 
 //after the new user giving the information validation takes place then we are updating the user data
 //and re-writing the token for next one day
-signup.post("/signupSuccessful", tempAuth,(req, res) => {
-  console.log(`Headers: ${JSON.stringify(req.headers)}`);
-  console.log(`Body: ${JSON.stringify(req.body)}`);
-  res.status(200).json({ message: 'Signup successful!' });
-});
-
-// signup.post("/signupSuccessful", tempAuth, async (req, res) => {
-//   console.log("tempAuth - > signup called success");
-//   try{     
-    
-//     const {fullName, userName , password  ,platform , email}= req.body;
-//  const user = req.user;
-//  console.log(user);
-//     if(!user){
-//       throw new Error("user  Not Found...");
-//     }  
-
-//     await validateUserInfromations(fullName , userName , password , platform , email );  
-   
-
-//   if(user){
-//     if(user.fullName && user.passport && user.userName){
-//       throw new Error("Already registed the informations");
-//     }
-//     const updatedStatus = await User.findByIdAndUpdate(user._id,{fullName:fullName, userName:userName , password:password});
-//     if (!updatedStatus) {
-//       throw new Error("User not found or update failed.");
-//   }
-
-    
-//     let token = await user.getJWT();
-// res.cookie("token",token, { 
-//   httpOnly: true, 
-//   secure: true, 
-//   sameSite: 'None' 
+// signup.post("/signupSuccessful", tempAuth,(req, res) => {
+//   console.log(`Headers: ${JSON.stringify(req.headers)}`);
+//   console.log(`Body: ${JSON.stringify(req.body)}`);
+//   res.status(200).json({ message: 'Signup successful!' });
 // });
-//     res.send({message:"successfully user registred"   });
+
+signup.post("/signupSuccessful", tempAuth, async (req, res) => {
+  console.log("tempAuth - > signup called success");
+  try{     
+    
+    const {fullName, userName , password  ,platform , email}= req.body;
+ const user = req.user;
+ console.log(user);
+    if(!user){
+      throw new Error("user  Not Found...");
+    }  
+
+    await validateUserInfromations(fullName , userName , password , platform , email );  
    
-// }
-// else{
-//   throw new Error("User not found ");
-// }
-// }catch(err){
-//   console.log(err);
-//   res.status(400).send({message : err.message});
-// }}); 
+
+  if(user){
+    if(user.fullName && user.passport && user.userName){
+      throw new Error("Already registed the informations");
+    }
+    const updatedStatus = await User.findByIdAndUpdate(user._id,{fullName:fullName, userName:userName , password:password});
+    if (!updatedStatus) {
+      throw new Error("User not found or update failed.");
+  }
+
+    
+    let token = await user.getJWT();
+res.cookie("token",token, { 
+  httpOnly: true, 
+  secure: true, 
+  sameSite: 'None' 
+});
+    res.send({message:"successfully user registred"   });
+   
+}
+else{
+  throw new Error("User not found ");
+}
+}catch(err){
+  console.log(err);
+  res.status(400).send({message : err.message});
+}}); 
 
 //this api works for login is the user gives correct username and password it gives jwt else it say 404
 signup.post("/userLogedIn", async (req, res) => { 
