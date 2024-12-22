@@ -15,7 +15,11 @@ async function auth(req,res,next) {
     }else if(!user.userName){
         
 const token = await user.getJWT();
-res.cookie("temp_token",token);
+res.cookie("temp_token",token, { 
+  httpOnly: true, 
+  secure: true, 
+  sameSite: 'None' 
+});
         res.redirect(`/newUserInfo?fullname=${user.fullName}&email=${user.email}&platform=${user.platform}&profileUrl=${user.profileUrl}`);
  
        }else{ 

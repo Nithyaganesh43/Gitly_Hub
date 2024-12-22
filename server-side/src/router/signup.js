@@ -67,18 +67,24 @@ signup.get(
 if(user){
  
 const token = await user.getJWT();
-res.cookie("token",token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === 'production', 
-  sameSite: 'Strict',
+res.cookie("token",token, { 
+  httpOnly: true, 
+  secure: true, 
+  sameSite: 'None' 
 });
+
 
 res.redirect(`/home`); 
 }else{ 
 const newUser = new User(userData);
 const token = await newUser.getJWT();
 console.log("temp_token send"); 
-res.cookie('temp_token', token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+res.cookie('temp_token', token, { 
+  httpOnly: true, 
+  secure: true, 
+  sameSite: 'None' 
+});
+
 
 await newUser.save();
 res.redirect(`/newUserInfo?fullname=${userData.fullName}&email=${userData.email}&platform=${userData.platform}&profileUrl=${userData.profileUrl}`);
@@ -133,18 +139,24 @@ signup.get(
 if(user){
    
 const token = await user.getJWT();
-res.cookie("token",token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === 'production', 
-  sameSite: 'Strict',
+res.cookie("token",token, { 
+  httpOnly: true, 
+  secure: true, 
+  sameSite: 'None' 
 });
+
 
 res.redirect(`/home`); 
 }else{ 
 const newUser = new User(userData);
 const token = await newUser.getJWT();
 console.log("temp_token send"); 
-res.cookie('temp_token', token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+res.cookie('temp_token', token, { 
+  httpOnly: true, 
+  secure: true, 
+  sameSite: 'None' 
+});
+
 
 await newUser.save();
 res.redirect(`/newUserInfo?fullname=${userData.fullName}&email=${userData.email}&platform=${userData.platform}&profileUrl=${userData.profileUrl}`);
@@ -188,7 +200,13 @@ const userData = {
   const newUser = new User(userData);
    token = await newUser.getJWT();
    console.log("temp_token send"); 
-res.cookie('temp_token', token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+
+res.cookie('temp_token', token, { 
+  httpOnly: true, 
+  secure: true, 
+  sameSite: 'None' 
+});
+
 
   await newUser.save(); 
   res.send({status : " success" , message : "SignUp successfull"});
@@ -273,10 +291,10 @@ signup.post("/signupSuccessful", tempAuth,(req, res) => {
 
     
 //     let token = await user.getJWT();
-//     res.cookie("token",token, {
-//   httpOnly: true,
-//   secure: process.env.NODE_ENV === 'production', 
-//   sameSite: 'Strict',
+// res.cookie("token",token, { 
+//   httpOnly: true, 
+//   secure: true, 
+//   sameSite: 'None' 
 // });
 //     res.send({message:"successfully user registred"   });
    
@@ -302,11 +320,11 @@ signup.post("/userLogedIn", async (req, res) => {
   const user = await User.findOne( {userName:userName,password:password} );
   if(user){
     let token = await user.getJWT();
-    res.cookie("token",token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', 
-      sameSite: 'Strict',
-    }); 
+    res.cookie("token",token, { 
+      httpOnly: true, 
+      secure: true, 
+      sameSite: 'None' 
+    });
     res.send({message:"successfully user registred"});
   }else{
      
@@ -346,11 +364,11 @@ signup.post("/forgotPasswordVerifyOtp",async (req,res)=>
       throw new Error("User Not found");
     }
      token = await user.getJWT();
-    res.cookie("token",token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', 
-      sameSite: 'Strict',
-    });  
+     res.cookie("token",token, { 
+      httpOnly: true, 
+      secure: true, 
+      sameSite: 'None' 
+    });
     res.send({status : " success" , message : "SignUp successfull"});
     }catch(err){
       res.status(400).send({ status: "failed", message: err.message });
