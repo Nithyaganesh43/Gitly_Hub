@@ -10,7 +10,7 @@ async function validateNewUser(req,res,next) {
     
     throw new Error(`userAlreadyRegistred`);
   }
-    console.log("New User added to database :validateNewUser.js");
+    //console.log("New User added to database :validateNewUser.js");
  const newUser = new User(userData);
  await newUser.save();
   const token = await newUser.get10mJWT();

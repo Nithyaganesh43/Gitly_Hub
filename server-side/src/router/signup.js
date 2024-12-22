@@ -78,7 +78,7 @@ res.redirect(`/home`);
 }else{ 
 const newUser = new User(userData);
 const token = await newUser.getJWT();
-console.log("token send"); 
+//console.log("token send"); 
 res.cookie('token', token, { 
   httpOnly: true, 
   secure: true, 
@@ -150,7 +150,7 @@ res.redirect(`/home`);
 }else{ 
 const newUser = new User(userData);
 const token = await newUser.getJWT();
-console.log("token send"); 
+//console.log("token send"); 
 res.cookie('token', token, { 
   httpOnly: true, 
   secure: true, 
@@ -199,7 +199,7 @@ const userData = {
  
   const newUser = new User(userData);
    token = await newUser.getJWT();
-   console.log("token send"); 
+   //console.log("token send"); 
 
 res.cookie('token', token, { 
   httpOnly: true, 
@@ -261,18 +261,18 @@ signup.post("/auth/gitly",async (req,res)=>{
 //after the new user giving the information validation takes place then we are updating the user data
 //and re-writing the token for next one day
 // signup.post("/signupSuccessful", tempAuth,(req, res) => {
-//   console.log(`Headers: ${JSON.stringify(req.headers)}`);
-//   console.log(`Body: ${JSON.stringify(req.body)}`);
+//   //console.log(`Headers: ${JSON.stringify(req.headers)}`);
+//   //console.log(`Body: ${JSON.stringify(req.body)}`);
 //   res.status(200).json({ message: 'Signup successful!' });
 // });
 
 signup.post("/signupSuccessful", tempAuth, async (req, res) => {
-  console.log("tempAuth - > signup called success");
+  //console.log("tempAuth - > signup called success");
   try{     
     
     const {fullName, userName , password  ,platform , email}= req.body;
  const user = req.user;
- console.log(user);
+ //console.log(user);
     if(!user){
       throw new Error("user  Not Found...");
     }  
@@ -303,7 +303,7 @@ else{
   throw new Error("User not found ");
 }
 }catch(err){
-  console.log(err);
+  //console.log(err);
   res.status(400).send({message : err.message});
 }}); 
 
@@ -480,7 +480,7 @@ signup.get("/userAuth",(req,res)=>{
 signup.get("/newUserInfo",tempAuth,async (req, res) => {
   const { fullname, email, platform, profileUrl } = req.query;  
   const jwt =await req.user.getJWT();
-  console.log("token send"); 
+  //console.log("token send"); 
 res.cookie('token',jwt, {
   httpOnly: true, 
   secure: true, 

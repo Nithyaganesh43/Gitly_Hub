@@ -38,7 +38,7 @@ catch(err){
 async function tempAuth(req, res, next) {
   try {
     const tokenByUser = req.cookies?.token; 
-    console.log("Token: ", req.cookies);
+    //console.log("Token: ", req.cookies);
     
 
     if (!tokenByUser) {
@@ -46,7 +46,7 @@ async function tempAuth(req, res, next) {
     }
     const userid = await jwt.verify(tokenByUser, process.env.SECRET, (err, decoded) => {
       if (err) {
-        console.log("JWT Verification Error: ", err);
+        //console.log("JWT Verification Error: ", err);
         throw new Error("Token verification failed");
       }
       return decoded;
@@ -54,18 +54,18 @@ async function tempAuth(req, res, next) {
     
 
     const user = await User.findById(userid);
-    console.log("User found: ", user);
+    //console.log("User found: ", user);
 
 
     if (!user) {
       throw new Error("Login with GitHub or Google");
     }
 
-    console.log("tempAuth success");
+    //console.log("tempAuth success");
     req.user = user; 
     next(); 
   } catch (err) {
-    console.log("tempAuth failed redirecting to userAuth"); 
+    //console.log("tempAuth failed redirecting to userAuth"); 
     return res.redirect(`/userAuth`);
   }
 }
