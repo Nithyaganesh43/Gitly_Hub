@@ -44,7 +44,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 id="welcomeMessage">Loading...</h1>
+        <h1 id="welcomeMessage"></h1>
         <button onclick="clearAllTokens()">Log Out</button>
     </div>
     <script>
@@ -62,7 +62,7 @@
                     const v = count % 100;
                     const ordinalSuffix = suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0];
  
-                    document.getElementById('welcomeMessage').textContent = `Welcome ${name}, you are my ${count}${ordinalSuffix} user.`;
+                    document.getElementById('welcomeMessage').textContent = `Congratulations ${name}, you are my ${count}${ordinalSuffix} user.`;
                     return;  
                 } catch (error) {
                     attempts++;
@@ -74,16 +74,21 @@
             document.getElementById('welcomeMessage').textContent = "Unable to fetch user data. Please try again later.";
         }
 
-        function clearAllTokens() {
-            const cookies = document.cookie.split("; ");
-            for (const cookie of cookies) {
-                const name = cookie.split("=")[0];
-                if (name === "token") {
-                    document.cookie = `${name}=;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-                    document.cookie = `${name}=;path=/;domain=${window.location.hostname};expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-                }
-            }
-            window.location.href = "https://nithyaganesh.netlify.app/";
+      async  function clearAllTokens() {
+            await axios.post(`https://ng-dmcz.onrender.com/logout`,
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => {
+            window.location.href = `https://ng-dmcz.onrender.com`;
+        })
+        .catch(error => {
+            clearAllTokens();
+        });
+             
         }
         
 

@@ -471,6 +471,14 @@ signup.get(`/getOk` ,async (req,res)=>{
 });
  
 
+signup.get(`/logout`, async (req, res) => { 
+  res.cookie("token","", { 
+    httpOnly: true, 
+    secure: true, 
+    sameSite: 'None' 
+  });
+});
+
 //api which is called by client for  authentication it just redirects the user to auth page
 signup.get("/userAuth",(req,res)=>{
   res.setHeader('Access-Control-Allow-Origin', 'https://nithyaganesh.netlify.app');
