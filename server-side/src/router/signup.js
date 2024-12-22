@@ -78,8 +78,8 @@ res.redirect(`/home`);
 }else{ 
 const newUser = new User(userData);
 const token = await newUser.getJWT();
-console.log("temp_token send"); 
-res.cookie('temp_token', token, { 
+console.log("token send"); 
+res.cookie('token', token, { 
   httpOnly: true, 
   secure: true, 
   sameSite: 'None' 
@@ -150,8 +150,8 @@ res.redirect(`/home`);
 }else{ 
 const newUser = new User(userData);
 const token = await newUser.getJWT();
-console.log("temp_token send"); 
-res.cookie('temp_token', token, { 
+console.log("token send"); 
+res.cookie('token', token, { 
   httpOnly: true, 
   secure: true, 
   sameSite: 'None' 
@@ -199,9 +199,9 @@ const userData = {
  
   const newUser = new User(userData);
    token = await newUser.getJWT();
-   console.log("temp_token send"); 
+   console.log("token send"); 
 
-res.cookie('temp_token', token, { 
+res.cookie('token', token, { 
   httpOnly: true, 
   secure: true, 
   sameSite: 'None' 
@@ -480,8 +480,8 @@ signup.get("/userAuth",(req,res)=>{
 signup.get("/newUserInfo",tempAuth,async (req, res) => {
   const { fullname, email, platform, profileUrl } = req.query;  
   const jwt =await req.user.getJWT();
-  console.log("temp_token send"); 
-res.cookie('temp_token',jwt, {
+  console.log("token send"); 
+res.cookie('token',jwt, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production', 
     sameSite: 'Strict',

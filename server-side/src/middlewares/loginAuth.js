@@ -15,7 +15,7 @@ async function auth(req,res,next) {
     }else if(!user.userName){
         
 const token = await user.getJWT();
-res.cookie("temp_token",token, { 
+res.cookie("token",token, { 
   httpOnly: true, 
   secure: true, 
   sameSite: 'None' 
@@ -37,7 +37,7 @@ catch(err){
 
 async function tempAuth(req, res, next) {
   try {
-    const tokenByUser = req.cookies?.temp_token; 
+    const tokenByUser = req.cookies?.token; 
     console.log("Token: ", req.cookies);
     
 
