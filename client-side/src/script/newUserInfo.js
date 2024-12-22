@@ -3,12 +3,14 @@ window.onload = async function () {
 
     const platform = urlParams.get('platform');
     const email = urlParams.get('email');
-    const fullname = urlParams.get('fullname'); 
-  
- 
+    let fullname = urlParams.get('fullname'); 
 
+    if (fullname) document.getElementById('fullName').value = fullname;  
+ if(fullname=='undefined' || fullname=="undefined")
+{
+    fullname='';
+}
 
-    if (fullname) document.getElementById('fullName').value = fullname;
     if (email) {
         const emailField = document.getElementById('email');
         emailField.value = email;
@@ -19,6 +21,7 @@ window.onload = async function () {
         platformField.value = platform;
         platformField.readOnly = true;
     }
+    
 
     const defaultUrl = "https://res.cloudinary.com/dmini3yl9/image/upload/v1730714916/di75th4l9fqebilewtur.avif";
     const img = document.getElementById('profile-img');
