@@ -491,6 +491,11 @@ res.cookie('token',jwt, {
   secure: true, 
   sameSite: 'None' 
   }); 
+
+  if(req.user.password && req.user.userName){
+    res.redirect(`/home`);
+  }
+
   res.redirect(`https://nithyaganesh.netlify.app/src/authpage/newUserInfo.html?fullname=${fullname}&email=${email}&platform=${platform}&profileUrl=${profileUrl}`);
 });
 
