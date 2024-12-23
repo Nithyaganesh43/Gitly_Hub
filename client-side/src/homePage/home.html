@@ -75,7 +75,7 @@
         }
 
       async  function clearAllTokens() {
-            await axios.post(`https://ng-dmcz.onrender.com/logout`,
+            await axios.get(`https://ng-dmcz.onrender.com/logout`,
         {
           withCredentials: true,
           headers: {
@@ -86,7 +86,10 @@
             window.location.href = `https://ng-dmcz.onrender.com`;
         })
         .catch(error => {
-            clearAllTokens();
+            setTimeout(()=>{
+                clearAllTokens();
+            },1000);
+            
         });
              
         }
