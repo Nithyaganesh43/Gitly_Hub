@@ -62,7 +62,7 @@
                     const v = count % 100;
                     const ordinalSuffix = suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0];
  
-                    document.getElementById('welcomeMessage').textContent = `Congratulations ${name}, you are my ${count}${ordinalSuffix} user.`;
+                    document.getElementById('welcomeMessage').textContent = `Thank you ${name}, you are my ${count}${ordinalSuffix} user.`;
                     return;  
                 } catch (error) {
                     attempts++;
@@ -71,7 +71,7 @@
                 }
             }
  
-            document.getElementById('welcomeMessage').textContent = "Unable to fetch user data. Please try again later.";
+            document.getElementById('welcomeMessage').textContent = " ";
         }
 
       async  function clearAllTokens() {
