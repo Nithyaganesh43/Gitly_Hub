@@ -5,12 +5,12 @@ window.onload = async function () {
     const email = urlParams.get('email');
     let fullname = urlParams.get('fullname'); 
 
-    if (fullname) document.getElementById('fullName').value = fullname;  
- if(fullname=='undefined' || fullname=="undefined")
+ if("undefined"==fullname)
 {
     fullname='';
 }
-
+ 
+    if (fullname) document.getElementById('fullName').value = fullname;  
     if (email) {
         const emailField = document.getElementById('email');
         emailField.value = email;
