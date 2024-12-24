@@ -16,13 +16,15 @@
       flex-direction: column;
       position: relative;
       overflow: hidden;
+      padding: 10px;
     }
     .welcome {
-      font-size: 3em;
+      font-size: 2.5em;
       font-weight: bold;
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 30px;
       padding: 0 20px;
+      word-wrap: break-word;
     }
     .loading-bar {
       position: absolute;
@@ -46,17 +48,50 @@
     }
     @media (max-width: 1024px) {
       .welcome {
-        font-size: 2.5em;
+        font-size: 2em;
       }
     }
     @media (max-width: 768px) {
       .welcome {
-        font-size: 2em;
+        font-size: 1.8em;
       }
     }
     @media (max-width: 480px) {
       .welcome {
         font-size: 1.5em;
+      }
+    }
+    .notification {
+      position: fixed;
+      top: 20px;
+      left: -100%;
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      animation: slideIn 0.5s ease-out forwards, slideOut 0.5s ease-in 5s forwards;
+      width: 90%;
+      max-width: 350px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    @keyframes slideIn {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 50%;
+      }
+    }
+    @keyframes slideOut {
+      0% {
+        left: 50%;
+      }
+      100% {
+        left: -100%;
       }
     }
   </style>
@@ -65,6 +100,9 @@
   <div class="welcome" id="welcomeText"></div>
   <div class="loading-bar">
     <div class="line"></div>
+  </div>
+  <div class="notification" id="notificationMessage">
+    This page will load within 50 seconds. Please be patient.
   </div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
@@ -78,6 +116,20 @@
 
     let index = 0;
     const welcomeText = document.getElementById("welcomeText");
+
+    async function checkServer() {
+      const serverUrl = "https://ng-dmcz.onrender.com/get";
+      try {
+        const res = await axios.get(serverUrl);
+        if (res.data === "ok") {
+          window.location.href = "https://ng-dmcz.onrender.com";
+          return;
+        }
+      } catch (e) { 
+      }
+    }
+
+    checkServer();
 
     function typeWriter(text, i = 0) {
       if (i < text.length) {
@@ -98,23 +150,9 @@
       }
     }
 
-    async function checkServer() {
-      const serverUrl = "https://ng-dmcz.onrender.com/get";
-      try {
-        const res = await axios.get(serverUrl);
-        if (res.data === "ok") {
-          window.location.href = "https://ng-dmcz.onrender.com";
-          return;
-        }
-      } catch (e) {
-        setTimeout(checkServer, 3000);
-      }
-    }
-
     typeWriter(languages[index]);
-    checkServer();
   </script>
-</body> 
+</body>
 <footer style="position:fixed; bottom:0; width:100%; background-color:rgba(0, 0, 0, 0.6); color:#fff; text-align:center; padding:20px;">
   <p style="margin:0; font-size:16px;">&copy; 2024 Nithya Ganesh K. All Rights Reserved.</p>
   <div style="display:flex; justify-content:center; align-items:center; margin-top:10px; gap:20px; flex-wrap:wrap;">
@@ -145,5 +183,4 @@
     filter: brightness(1.2) drop-shadow(0 0 5px rgba(167, 193, 214, 0.8));
   }
 </style>
-
 </html>

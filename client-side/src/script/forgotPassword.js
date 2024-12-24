@@ -32,8 +32,7 @@ function butt(opt) {
 
 async function getOTP() {
     email = document.getElementById("email").value;
-    window.localStorage.setItem("email", email);
-    console.log("forgotPasswordGetOtp"+email)
+    window.localStorage.setItem("email", email); 
     await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordGetOtp`, { email },
         {
           withCredentials: true,
@@ -59,8 +58,7 @@ async function getOTP() {
                 alert(error.response.data.message);
                 window.location.href = `https://ng-dmcz.onrender.com/signup`;
             } 
-            else{
-                console.log(error);
+            else{ 
                 alert("Unknown error");
             }
         });
@@ -73,8 +71,7 @@ async function submitOTP() {
         return;
     }
     
-    email = window.localStorage.getItem("email");
-    console.log("forgotPasswordVerifyOtp" + email);
+    email = window.localStorage.getItem("email"); 
     await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordVerifyOtp`, { otp, email },
         {
           withCredentials: true,
@@ -99,7 +96,7 @@ async function submitOTP() {
         })
         .catch(error => {
             let swe = error.response.data.message || error.response || error;
-            console.log(error);
+         
             alert(swe);
         });
 }

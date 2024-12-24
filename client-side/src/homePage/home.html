@@ -65,8 +65,7 @@
                     document.getElementById('welcomeMessage').textContent = `Thank you ${name}, you are my ${count}${ordinalSuffix} user.`;
                     return;  
                 } catch (error) {
-                    attempts++;
-                    console.warn(`Attempt ${attempts} failed. Retrying...`);
+                    attempts++; 
                     await new Promise(resolve => setTimeout(resolve, retryDelay));  
                 }
             }

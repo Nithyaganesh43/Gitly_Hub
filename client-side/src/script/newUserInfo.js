@@ -73,13 +73,11 @@ window.onload = async function () {
                     'Content-Type': 'application/json'
                   }
                 }
-              ).then((response) => {
-                  console.log(response);
+              ).then((response) => { 
                   alert(response.data.message);
                   window.location.href = 'https://nithyaganesh.netlify.app/src/homePage/home.html';
                 })
-                .catch((error) => {
-                  console.log(error);
+                .catch((error) => { 
                   alert(error.response?.data?.message || 'An error occurred');
                 });
               
