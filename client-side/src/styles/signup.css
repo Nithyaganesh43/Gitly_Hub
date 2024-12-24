@@ -78,8 +78,7 @@ form h1 {
     gap: 1.5rem;
 }
 
-.social-login img {
-    /* width: 50px; */
+.social-login img { 
     height: 40px;
     cursor: pointer;
     transition: transform 0.3s ease;

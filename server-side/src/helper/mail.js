@@ -153,24 +153,7 @@ async function sendMail(otp, toEmail) {
             <h1>Your OTP Code </h1>
             <div class="otp">${otp}</div>
             <p class="note">Please copy the OTP above and use it for verification within 10 minutes.</p>
-        </div>
-        <footer>
-            <p style="margin:0; font-size:16px;"> 2024 &copy; Nithya Ganesh K</p>
-            <div class="social-icons">
-              <a href="https://www.instagram.com/i_am_nithyaganesh?igsh=cm44eXo4bTluN2Y1" target="_blank" style="text-decoration:none;">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" class="logo1">
-              </a>
-              <a href="https://github.com/Nithyaganesh43" target="_blank" style="text-decoration:none;">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" alt="GitHub" class="logo1">
-              </a>
-              <a href="https://www.linkedin.com/in/nithyaganesh43?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" style="text-decoration:none;">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733561.png" alt="LinkedIn" class="logo1">
-              </a>
-              <a href="https://wa.me/919042421622" target="_blank" style="text-decoration:none;">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="logo1">
-              </a>
-            </div>
-        </footer>
+        </div> 
     </body>
 </html>`;
 
