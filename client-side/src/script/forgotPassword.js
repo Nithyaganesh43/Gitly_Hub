@@ -33,6 +33,7 @@ function butt(opt) {
 async function getOTP() {
     window.localStorage.setItem("email", email);
     email = document.getElementById("email").value;
+    console.log("forgotPasswordGetOtp"+email)
     await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordGetOtp`, { email },
         {
           withCredentials: true,
@@ -53,9 +54,14 @@ async function getOTP() {
             if (error.response.data.message === "Email not found pls SignUp") {
                 alert(error.response.data.message);
                 window.location.href = `https://ng-dmcz.onrender.com/signup`;
-            }
-            else {
+            } 
+            else  if (error.response.data.message) {
+                alert(error.response.data.message);
+                window.location.href = `https://ng-dmcz.onrender.com/signup`;
+            } 
+            else{
                 console.log(error);
+                alert("Unknown error");
             }
         });
 }
@@ -68,6 +74,7 @@ async function submitOTP() {
     }
     
     email = window.localStorage.getItem("email");
+    console.log("forgotPasswordVerifyOtp" + email);
     await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordVerifyOtp`, { otp, email },
         {
           withCredentials: true,
