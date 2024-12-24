@@ -472,11 +472,12 @@ signup.get(`/getOk` ,async (req,res)=>{
  
 
 signup.get(`/logout`, async (req, res) => { 
-  res.cookie("token","", { 
+  res.cookie('token',"", { 
     httpOnly: true, 
     secure: true, 
     sameSite: 'None' 
   });
+  res.send("logout");
 });
 
 //api which is called by client for  authentication it just redirects the user to auth page
