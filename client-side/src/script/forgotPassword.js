@@ -33,8 +33,8 @@ function butt(opt) {
 }
 
 async function getOTP() {
-    window.localStorage.setItem("email", email);
     email = document.getElementById("email").value;
+    window.localStorage.setItem("email", email);
     await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordGetOtp`, { email },
         {
           withCredentials: true,
@@ -46,7 +46,7 @@ async function getOTP() {
             alert(response.data.message);
             operation = "submit";
             document.getElementById("box").innerHTML = `
-                <h2>Otp sended to ${email} kindly check your inbox or spam</h2>
+                <h2>Otp sended to ${email}</h2><br><h2> kindly check your inbox or spam</h2>
                 <input type="text" id="otp" placeholder="Enter Your 6-digit OTP" required>
                 <button type="button" onclick="submitOTP()" id="butt">Submit OTP</button>
             `;
@@ -61,10 +61,11 @@ async function getOTP() {
 
 async function submitOTP() {
     const otp = document.getElementById("otp").value;
-    if (otp.length !== 6) {
+    if (otp.length !== 6 || isNaN(otp)) {
         alert("Please enter a valid OTP.");
         return;
     }
+    
     email = window.localStorage.getItem("email");
     await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordVerifyOtp`, { otp, email },
         {

@@ -390,10 +390,10 @@ signup.post("/forgotPasswordGetOtp",async (req,res)=>{
       
       email=email.trim().toLowerCase();
       const user = await User.findOne({email:email,platform:"gitly"});
-     
-      if(!user){
-         throw new Error("Email not found pls SignUp");
-      }
+      
+    if(!user){
+      throw new Error("User Not found");
+    }
   
       function generateOTP() {
         return Math.floor(100000 + Math.random() * 900000);
@@ -418,20 +418,15 @@ catch(err){
 })
   
 // on successfully validated the forgotpasswored api this api used to reset the password by updating it 
-signup.post("/resetPassword", async (req, res) => { 
+signup.post("/resetPassword",auth, async (req, res) => { 
   
   try{ 
     const { password}= req.body;
      if(!password){
       throw new Error("Password Not found");
     }else{
-      
-  const tokenByUser = req.cookies?.token;
-  if(!tokenByUser){
-    throw new Error("Token Not Found try again");
-  }
- const userid = await jwt.verify(tokenByUser , process.env.SECRET);
-  const user = await User.findById( userid );
+       
+  const user = req.user;
  
   if(user){
   
