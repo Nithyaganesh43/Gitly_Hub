@@ -392,7 +392,7 @@ signup.post("/forgotPasswordGetOtp",async (req,res)=>{
       const user = await User.findOne({email:email,platform:"gitly"});
       
     if(!user){
-      throw new Error("User Not found");
+      throw new Error(`${email} ${user} not found`);
     }
   
       function generateOTP() {
