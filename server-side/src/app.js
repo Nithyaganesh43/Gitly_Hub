@@ -1,32 +1,40 @@
 const express = require('express');
-require('dotenv').config();
-
 const app = express();
+require('dotenv').config(); 
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
-app.use((req,res,next)=>{
-  //console.log("Cookies: ", req.cookies);
-next();
-})
+const express = require('express');
+const helmet = require('helmet');
+const cors = require('cors');
+const rateLimit = require('express-rate-limit');
+const xss = require('xss-clean');   
+const signup = require("./router/signup");
+const connectToDB = require("./config/database");  
+const { auth } = require("./middlewares/loginAuth"); 
+app.use(helmet()); 
+app.use(xss()); 
+app.use(cookieParser()); 
+app.use(express.json());  
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, 
+  max: 100,  
+  message: 'Too many requests, please try again later.'
+});
+ 
+app.use(limiter);
+
  
 
-const cors = require('cors');
 
 const corsOptions = {
   origin: 'https://nithyaganesh.netlify.app',
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'], // Include any custom headers
+  allowedHeaders: ['Content-Type', 'Authorization'],  
   credentials: true,
 };
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));  
-app.use(express.json());  
  
-const signup = require("./router/signup");
-const connectToDB = require("./config/database");  
-const { auth } = require("./middlewares/loginAuth"); 
 
-app.use(express.json());
 
 app.use(signup); 
 
