@@ -323,9 +323,10 @@ signup.post("/userLogedIn", async (req, res) => {
     }else if(!password){
       throw new Error("Password Not found");
     }else{
-    password = await hashPassword(password); 
-  const user = await User.findOne( {userName:userName,password:password} );
-  if(user){
+     
+  const user = await User.findOne( {userName:userName} );
+  if(user && comparePassword(password,user.password)){
+
     let token = await user.getJWT();
     res.cookie("token",token, { 
       httpOnly: true, 
@@ -335,7 +336,7 @@ signup.post("/userLogedIn", async (req, res) => {
     res.send({message:"successfully user registred"});
   }else{
      
-    throw new Error("User Not found");
+    throw new Error("Login Failed");
   }
     }
    
