@@ -325,7 +325,7 @@ signup.post("/userLogedIn", async (req, res) => {
     }else{
      
   const user = await User.findOne( {userName:userName} );
-  if(user && comparePassword(password,user.password)){
+  if(user && await comparePassword(password,user.password)){
 
     let token = await user.getJWT();
     res.cookie("token",token, { 
