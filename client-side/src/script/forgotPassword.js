@@ -54,6 +54,9 @@ async function getOTP() {
                 alert(error.response.data.message);
                 window.location.href = `https://ng-dmcz.onrender.com/signup`;
             }
+            else {
+                console.log(error);
+            }
         });
 }
 
