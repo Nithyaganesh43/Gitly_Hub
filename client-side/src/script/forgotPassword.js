@@ -92,7 +92,7 @@ async function submitOTP() {
         })
         .catch(error => {
             let swe = error.response.data.message || error.response || error;
-            alert(error.response.data.message);
+            alert(swe);
         });
 }
 
