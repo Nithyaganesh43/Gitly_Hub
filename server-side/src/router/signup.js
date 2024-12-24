@@ -25,7 +25,19 @@ signup.use(passport.initialize());
    
   
 signup.use(express.json());
-  
+const bcrypt = require('bcrypt');
+
+async function hashPassword(password) {
+    const saltRounds = 10;
+    return await bcrypt.hash(password, saltRounds);
+}
+
+async function comparePassword(password, hashedPassword) {
+    return await bcrypt.compare(password, hashedPassword) ? 1 : 0;
+}  
+
+
+
 passport.use(
   new GitHubStrategy(
     {
@@ -259,20 +271,13 @@ signup.post("/auth/gitly",async (req,res)=>{
 }) 
 
 //after the new user giving the information validation takes place then we are updating the user data
-//and re-writing the token for next one day
-// signup.post("/signupSuccessful", tempAuth,(req, res) => {
-//   //console.log(`Headers: ${JSON.stringify(req.headers)}`);
-//   //console.log(`Body: ${JSON.stringify(req.body)}`);
-//   res.status(200).json({ message: 'Signup successful!' });
-// });
-
-signup.post("/signupSuccessful", tempAuth, async (req, res) => {
-  //console.log("tempAuth - > signup called success");
+ 
+ 
+signup.post("/signupSuccessful", tempAuth, async (req, res) => { 
   try{     
     
-    const {fullName, userName , password  ,platform , email}= req.body;
- const user = req.user;
- //console.log(user);
+    let {fullName, userName , password  ,platform , email}= req.body;
+ const user = req.user; 
     if(!user){
       throw new Error("user  Not Found...");
     }  
@@ -284,6 +289,8 @@ signup.post("/signupSuccessful", tempAuth, async (req, res) => {
     if(user.fullName && user.passport && user.userName){
       throw new Error("Already registed the informations");
     }
+
+    password = await hashPassword(password);
     const updatedStatus = await User.findByIdAndUpdate(user._id,{fullName:fullName, userName:userName , password:password});
     if (!updatedStatus) {
       throw new Error("User not found or update failed.");
@@ -310,13 +317,13 @@ else{
 //this api works for login is the user gives correct username and password it gives jwt else it say 404
 signup.post("/userLogedIn", async (req, res) => { 
   try{ 
-    const {userName,password}= req.body; 
+    let {userName,password}= req.body; 
     if(!userName){
       throw new Error("User Name Not found");
     }else if(!password){
       throw new Error("Password Not found");
     }else{
-     
+    password = await hashPassword(password); 
   const user = await User.findOne( {userName:userName,password:password} );
   if(user){
     let token = await user.getJWT();
@@ -421,7 +428,7 @@ catch(err){
 signup.post("/resetPassword",auth, async (req, res) => { 
   
   try{ 
-    const { password}= req.body;
+    let { password}= req.body;
      if(!password){
       throw new Error("Password Not found");
     }else{
@@ -429,7 +436,7 @@ signup.post("/resetPassword",auth, async (req, res) => {
   const user = req.user;
  
   if(user){
-  
+  password =await hashPassword(password);
     const updatedStatus = await User.findByIdAndUpdate(user._id,{ password:password} , {runValidators : true});
     if (!updatedStatus) {
       throw new Error("User not found or update failed.");
