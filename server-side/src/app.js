@@ -9,6 +9,7 @@ const xss = require('xss-clean');
 const signup = require("./router/signup");
 const connectToDB = require("./config/database");  
 const { auth } = require("./middlewares/loginAuth"); 
+
 app.use(helmet()); 
 app.use(xss()); 
 app.use(cookieParser()); 

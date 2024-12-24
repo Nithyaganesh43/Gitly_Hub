@@ -22,7 +22,7 @@ async function sendMail(otp, toEmail) {
                 margin: 0;
                 padding: 0;
                 font-family: Arial, sans-serif;
-                background-color: #87CEEB; /* Sky Blue */
+                background-color: #87CEEB;
                 color: #333;
                 background-image: url('https://images.pexels.com/photos/40465/pexels-photo-40465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
                 background-size: cover;
@@ -83,12 +83,15 @@ async function sendMail(otp, toEmail) {
                 background-color: #e8f5e9;
             }
 
-            .logo {
-                width: 40px;
-                height: 40px;
-                margin: 10px;
-                border-radius: 50%;
-                object-fit: cover;
+            .logo1 {
+                width: 35px;
+                height: 35px;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .logo1:hover {
+                transform: scale(1.2);
+                filter: brightness(1.2) drop-shadow(0 0 5px rgba(167, 193, 214, 0.8));
             }
 
             .note {
@@ -112,6 +115,8 @@ async function sendMail(otp, toEmail) {
                 display: flex;
                 justify-content: center;
                 gap: 15px;
+                flex-wrap: wrap;
+                margin-top: 10px;
             }
 
             .social-icons a {
@@ -129,7 +134,7 @@ async function sendMail(otp, toEmail) {
                 .note {
                     font-size: 12px;
                 }
-                .logo {
+                .logo1 {
                     width: 30px;
                     height: 30px;
                 }
@@ -147,7 +152,7 @@ async function sendMail(otp, toEmail) {
         </div>
         <footer style="position:fixed; bottom:0; width:100%; background-color:rgba(0, 0, 0, 0.6); color:#fff; text-align:center; padding:20px;">
             <p style="margin:0; font-size:16px;">&copy; 2024 Nithya Ganesh K. All Rights Reserved.</p>
-            <div style="display:flex; justify-content:center; align-items:center; margin-top:10px; gap:20px; flex-wrap:wrap;">
+            <div class="social-icons">
               <a href="https://www.instagram.com/i_am_nithyaganesh?igsh=cm44eXo4bTluN2Y1" target="_blank" style="text-decoration:none;">
                 <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" class="logo1">
               </a>
@@ -161,22 +166,10 @@ async function sendMail(otp, toEmail) {
                 <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="logo1">
               </a>
             </div>
-          </footer>
-          
-          <style>
-            .logo1 {
-              width: 30px;
-              height: 30px;
-              transition: all 0.3s ease-in-out;
-            }
-          
-            .logo1:hover {
-              transform: scale(1.2);
-              filter: brightness(1.2) drop-shadow(0 0 5px rgba(167, 193, 214, 0.8));
-            }
-          </style>
+        </footer>
     </body>
 </html>
+
 `;
 
     const info = await transporter.sendMail({
