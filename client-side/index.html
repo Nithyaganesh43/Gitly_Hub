@@ -100,23 +100,22 @@
 
     async function checkServer() {
       const serverUrl = "https://ng-dmcz.onrender.com/get";
-      while (true) {
-        try {
-          const res = await axios.get(serverUrl);
-          if (res.data === "ok") {
-            window.location.href = "https://ng-dmcz.onrender.com";
-            break;
-          }
-        } catch (e) {
-          await new Promise(resolve => setTimeout(resolve, 3000));
+      try {
+        const res = await axios.get(serverUrl);
+        if (res.data === "ok") {
+          window.location.href = "https://ng-dmcz.onrender.com";
+          return;
         }
+      } catch (e) {
+        setTimeout(checkServer, 3000);
       }
     }
 
     typeWriter(languages[index]);
     checkServer();
   </script>
-</body> <footer style="position:fixed; bottom:0; width:100%; background-color:#333; color:#fff; text-align:center; padding:20px;">
+</body> 
+<footer style="position:fixed; bottom:0; width:100%; background-color:#333; color:#fff; text-align:center; padding:20px;">
   <p style="margin:0;">&copy; 2024 Nithya Ganesh K, II Year CSE, 2027 Batch. All Rights Reserved.</p>
 </footer>
 </html>
