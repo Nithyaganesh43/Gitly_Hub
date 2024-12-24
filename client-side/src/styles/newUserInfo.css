@@ -13,19 +13,20 @@ body {
     justify-content: center;
     height: 100vh;
     background-color: #f0f2f5;
+    padding-bottom: 80px; /* Ensure space at the bottom to prevent footer overlap */
 }
 
-.form-container, form {
+.form-container {
+    width: 100%;
+    max-width: 400px;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
     padding: 2rem;
     text-align: center;
 }
 
-form h1, #profile-form h1 {
+form h1 {
     color: #333;
     margin-bottom: 1rem;
     font-size: 1.8rem;
@@ -71,8 +72,65 @@ button#submit-button {
 button#submit-button:hover {
     background-color: #45a049;
 }
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0; 
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0; 
+    font-size: 16px;
+    margin: 0; 
+}
 
-#userPassword {
-    margin: 2rem 0;
-    /* Add specific styling here if needed */
+footer .logo {
+    width: 30px;
+    height: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+footer .logo:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+}
+
+footer .social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+ 
+@media screen and (max-width: 768px) {
+    body {
+        padding-bottom: 70px; 
+    }
+
+    .form-container {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    form h1 {
+        font-size: 1.5rem;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"] {
+        font-size: 0.9rem;
+    }
+
+    button#submit-button {
+        font-size: 0.9rem;
+    }
+
+    footer {
+        padding: 15px;
+        font-size: 14px;
+    }
 }
