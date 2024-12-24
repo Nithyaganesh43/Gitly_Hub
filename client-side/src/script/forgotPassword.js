@@ -43,11 +43,16 @@ async function getOTP() {
         .then(response => {
             alert(response.data.message);
             operation = "submit";
-            document.getElementById("box").innerHTML = `
-                <h2>Otp sended to ${email}</h2><br><h2> kindly check your inbox or spam</h2>
-                <input type="text" id="otp" placeholder="Enter Your 6-digit OTP" required>
-                <button type="button" onclick="submitOTP()" id="butt">Submit OTP</button>
-            `;
+           
+document.getElementById("box").innerHTML = `
+<h2>Otp sent to ${email}</h2>
+<h3> Kindly check your inbox or spam</h3>
+<div class="input-container">
+    <input type="text" id="otp" placeholder="Enter Your 6-digit OTP" required>
+    <button type="button" onclick="submitOTP()" id="butt">Submit OTP</button>
+</div>
+`;
+        
         })
         .catch(error => {
             if (error.response.data.message === "Email not found pls SignUp") {
