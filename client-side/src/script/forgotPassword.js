@@ -4,9 +4,7 @@ let operation = "getotp";
 document.addEventListener("keydown", (e) => {
     const inputBox = document.querySelector("input:focus");
     const button = document.getElementById("butt");
-    if (inputBox && e.key !== "Enter") {
-        inputBox.value += e.key.length === 1 ? e.key : "";
-    }
+   
     if (e.key === "Enter") {
         switch (operation) {
             case "getotp":
@@ -33,8 +31,8 @@ function butt(opt) {
 }
 
 async function getOTP() {
-    email = document.getElementById("email").value;
     window.localStorage.setItem("email", email);
+    email = document.getElementById("email").value;
     await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordGetOtp`, { email },
         {
           withCredentials: true,
