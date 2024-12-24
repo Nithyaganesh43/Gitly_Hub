@@ -1,8 +1,7 @@
 const express = require('express');
 const app = express();
 require('dotenv').config(); 
-const cookieParser = require('cookie-parser');
-const express = require('express');
+const cookieParser = require('cookie-parser'); 
 const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
