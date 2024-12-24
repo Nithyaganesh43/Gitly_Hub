@@ -31,6 +31,7 @@ async function sendMail(otp, toEmail) {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                flex-direction: column;
             }
 
             @media (prefers-color-scheme: dark) {
@@ -103,6 +104,9 @@ async function sendMail(otp, toEmail) {
             footer {
                 text-align: center;
                 margin-top: 30px;
+                position: absolute;
+                bottom: 20px;
+                width: 100%;
             }
 
             .footer p {
@@ -146,12 +150,12 @@ async function sendMail(otp, toEmail) {
     </head>
     <body>
         <div class="container">
-            <h1>Your OTP Code</h1>
+            <h1>Your OTP Code </h1>
             <div class="otp">${otp}</div>
-            <p class="note">Please copy the OTP above and use it for verification.</p>
+            <p class="note">Please copy the OTP above and use it for verification within 10 minutes.</p>
         </div>
-        <footer style="position:fixed; bottom:0; width:100%; background-color:rgba(0, 0, 0, 0.6); color:#fff; text-align:center; padding:20px;">
-            <p style="margin:0; font-size:16px;">&copy; 2024 Nithya Ganesh K. All Rights Reserved.</p>
+        <footer>
+            <p style="margin:0; font-size:16px;"> 2024 &copy; Nithya Ganesh K</p>
             <div class="social-icons">
               <a href="https://www.instagram.com/i_am_nithyaganesh?igsh=cm44eXo4bTluN2Y1" target="_blank" style="text-decoration:none;">
                 <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" class="logo1">
@@ -168,9 +172,7 @@ async function sendMail(otp, toEmail) {
             </div>
         </footer>
     </body>
-</html>
-
-`;
+</html>`;
 
     const info = await transporter.sendMail({
         from: 'Nithya Ganesh',
