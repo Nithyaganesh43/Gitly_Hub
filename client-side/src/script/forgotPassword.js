@@ -91,6 +91,7 @@ async function submitOTP() {
             window.localStorage.setItem("email", "");
         })
         .catch(error => {
+            let swe = error.response.data.message || error.response || error;
             alert(error.response.data.message);
         });
 }
