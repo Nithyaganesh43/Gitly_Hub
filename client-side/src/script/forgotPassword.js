@@ -31,8 +31,8 @@ function butt(opt) {
 }
 
 async function getOTP() {
-    window.localStorage.setItem("email", email);
     email = document.getElementById("email").value;
+    window.localStorage.setItem("email", email);
     console.log("forgotPasswordGetOtp"+email)
     await axios.post(`https://ng-dmcz.onrender.com/forgotPasswordGetOtp`, { email },
         {
